@@ -42,6 +42,11 @@ app.use(
 const authRoutes = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
 
+const dashboardRoutes =
+  require('./routes/dashboardRoutes');
+
+app.use('/api/dashboard', dashboardRoutes);
+
 app.get('/', (req, res) => {
   res.json({
     success: true,
