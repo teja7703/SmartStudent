@@ -1,0 +1,40 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import '../../../core/constants/academic_constants.dart';
+import '../../../core/theme/app_colors.dart';
+import '../../../core/widgets/section_header.dart';
+import '../../../core/widgets/stat_card.dart';
+
+class StudyLevelsScreen extends StatelessWidget {
+  const StudyLevelsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Study Materials')),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          const SectionHeader(
+            title: 'Select Academic Level',
+          ),
+          const SizedBox(height: 12),
+          ...AcademicConstants.academicLevels.map((level) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: LevelListTile(
+                title: AcademicConstants.formatLevel(level),
+                subtitle: 'Tap to view subjects',
+                icon: Icons.school_rounded,
+                iconColor: AppColors.primaryBlue,
+                onTap: () => context.push(
+                  '/study-materials/$level/subjects',
+                ),
+              ),
+            );
+          }),
+        ],
+      ),
+    );
+  }
+}
