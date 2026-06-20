@@ -6,29 +6,33 @@ import '../../../core/widgets/section_header.dart';
 import '../../../core/widgets/stat_card.dart';
 
 class StudyLevelsScreen extends StatelessWidget {
-  const StudyLevelsScreen({super.key});
+  final String language;
+
+  const StudyLevelsScreen({super.key, required this.language});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Study Materials')),
+      appBar: AppBar(
+        title: Text(AcademicConstants.studyMaterialsTitle(language)),
+      ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          const SectionHeader(
-            title: 'Select Academic Level',
+          SectionHeader(
+            title: AcademicConstants.selectLevelTitle(language),
           ),
           const SizedBox(height: 12),
           ...AcademicConstants.academicLevels.map((level) {
             return Padding(
               padding: const EdgeInsets.only(bottom: 12),
               child: LevelListTile(
-                title: AcademicConstants.formatLevel(level),
-                subtitle: 'Tap to view subjects',
+                title: AcademicConstants.formatLevel(level, language),
+                subtitle: AcademicConstants.viewSubjects(language),
                 icon: Icons.school_rounded,
                 iconColor: AppColors.primaryBlue,
                 onTap: () => context.push(
-                  '/study-materials/$level/subjects',
+                  '/study-materials/$language/$level/subjects',
                 ),
               ),
             );

@@ -41,6 +41,11 @@ const studyMaterialSchema = new mongoose.Schema(
       type: String,
       default: 'English',
     },
+
+    order: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,

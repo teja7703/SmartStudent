@@ -22,8 +22,10 @@ const getStudyMaterials = async (req, res) => {
       academicLevel,
       subject,
       chapter,
+      language,
+      search,
       page = 1,
-      limit = 10,
+      limit = 100,
     } = req.query;
 
     const filter = {};
@@ -31,13 +33,18 @@ const getStudyMaterials = async (req, res) => {
     if (academicLevel) filter.academicLevel = academicLevel;
     if (subject) filter.subject = subject;
     if (chapter) filter.chapter = chapter;
+    if (language) filter.language = language;
+
+    if (search) {
+      filter.chapter = { $regex: search, $options: 'i' };
+    }
 
     const skip = (page - 1) * limit;
 
     const materials = await StudyMaterial.find(filter)
+      .sort({ order: 1, createdAt: 1 })
       .skip(skip)
-      .limit(Number(limit))
-      .sort({ createdAt: -1 });
+      .limit(Number(limit));
 
     const totalRecords =
       await StudyMaterial.countDocuments(filter);

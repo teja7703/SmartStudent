@@ -1,37 +1,45 @@
+import 'question_model.dart';
+
+/// A quiz session built dynamically from a set of questions that share the
+/// same class level and subject (category). The backend stores a question
+/// bank; quizzes are composed on the client by grouping those questions.
 class QuizModel {
   final String id;
-  final String question;
-  final List<String> options;
-  final String correctAnswer;
-  final String explanation;
-  final String category;
+  final String title;
+  final String subject;
   final String classLevel;
-  final String difficulty;
-  final int points;
+  final List<QuestionModel> questions;
 
-  QuizModel({
+  const QuizModel({
     required this.id,
-    required this.question,
-    required this.options,
-    required this.correctAnswer,
-    required this.explanation,
-    required this.category,
+    required this.title,
+    required this.subject,
     required this.classLevel,
-    required this.difficulty,
-    required this.points,
+    required this.questions,
   });
 
-  factory QuizModel.fromJson(Map<String, dynamic> json) {
+  int get totalQuestions => questions.length;
+
+  int get totalPoints =>
+      questions.fold(0, (sum, q) => sum + q.points);
+
+  /// 30 seconds per question.
+  int get durationSeconds => questions.length * 30;
+
+  String get difficultyLabel {
+    if (questions.isEmpty) return 'Mixed';
+    final set = questions.map((q) => q.difficulty).toSet();
+    if (set.length == 1) return set.first;
+    return 'Mixed';
+  }
+
+  QuizModel copyWith({List<QuestionModel>? questions}) {
     return QuizModel(
-      id: json['_id'] ?? '',
-      question: json['question'] ?? '',
-      options: List<String>.from(json['options'] ?? []),
-      correctAnswer: json['correctAnswer'] ?? '',
-      explanation: json['explanation'] ?? '',
-      category: json['category'] ?? '',
-      classLevel: json['classLevel'] ?? '',
-      difficulty: json['difficulty'] ?? 'Easy',
-      points: json['points'] ?? 10,
+      id: id,
+      title: title,
+      subject: subject,
+      classLevel: classLevel,
+      questions: questions ?? this.questions,
     );
   }
 }

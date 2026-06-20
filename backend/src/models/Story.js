@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 
 const storySchema = new mongoose.Schema(
   {
-    title: {
+    name: {
       type: String,
-      required: true,
+      default: '',
     },
 
-    description: {
+    title: {
       type: String,
       required: true,
     },
@@ -17,6 +17,21 @@ const storySchema = new mongoose.Schema(
       required: true,
     },
 
+    summary: {
+      type: String,
+      default: '',
+    },
+
+    successLesson: {
+      type: String,
+      default: '',
+    },
+
+    quote: {
+      type: String,
+      default: '',
+    },
+
     imageUrl: {
       type: String,
       default: '',
@@ -24,7 +39,7 @@ const storySchema = new mongoose.Schema(
 
     readTime: {
       type: Number,
-      default: 5,
+      default: 4,
     },
   },
   {

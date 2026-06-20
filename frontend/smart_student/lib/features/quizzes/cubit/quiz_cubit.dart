@@ -7,57 +7,40 @@ class QuizCubit extends Cubit<QuizState> {
 
   QuizCubit(this._repository) : super(QuizInitial());
 
-  Future<void> loadQuizzes({
-    String? classLevel,
-    String? category,
-    String? difficulty,
-  }) async {
+  Future<void> loadCatalog() async {
     emit(QuizLoading());
     try {
-      final quizzes = await _repository.getQuizzes(
-        classLevel: classLevel,
-        category: category,
-        difficulty: difficulty,
-      );
-      if (quizzes.isEmpty) {
+      final catalog = await _repository.getCatalog();
+      if (catalog.isEmpty) {
         emit(QuizEmpty());
-      } else {
-        emit(QuizLoaded(
-          quizzes: quizzes,
-          classLevel: classLevel,
-          category: category,
-          difficulty: difficulty,
-        ));
+        return;
       }
-    } catch (e) {
-      emit(QuizError(e.toString()));
-    }
-  }
 
-  Future<void> loadQuiz(String id) async {
-    emit(QuizLoading());
-    try {
-      final quiz = await _repository.getQuizById(id);
-      emit(QuizPlayLoaded(quiz: quiz));
-    } catch (e) {
-      emit(QuizError(e.toString()));
-    }
-  }
+      final classes = catalog.keys.toList()..sort(_compareClasses);
 
-  void selectAnswer(String answer) {
-    if (state is QuizPlayLoaded) {
-      final current = state as QuizPlayLoaded;
-      if (current.isAnswered) return;
-      final isCorrect = answer == current.quiz.correctAnswer;
-      emit(current.copyWith(
-        selectedAnswer: answer,
-        isAnswered: true,
-        isCorrect: isCorrect,
+      emit(QuizCatalogLoaded(
+        byClass: catalog,
+        classes: classes,
+        selectedClass: classes.first,
       ));
+    } catch (e) {
+      emit(QuizError(e.toString()));
     }
   }
 
-  void showScore({required int score, required int total, required int points}) {
-    emit(QuizScoreState(score: score, total: total, pointsEarned: points));
+  void selectClass(String classLevel) {
+    final current = state;
+    if (current is QuizCatalogLoaded) {
+      emit(current.copyWith(selectedClass: classLevel));
+    }
+  }
+
+  int _compareClasses(String a, String b) {
+    final na = int.tryParse(a);
+    final nb = int.tryParse(b);
+    if (na != null && nb != null) return na.compareTo(nb);
+    if (na != null) return -1;
+    if (nb != null) return 1;
+    return a.compareTo(b);
   }
 }

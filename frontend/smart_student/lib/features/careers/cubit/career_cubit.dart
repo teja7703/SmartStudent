@@ -7,10 +7,30 @@ class CareerCubit extends Cubit<CareerState> {
 
   CareerCubit(this._repository) : super(CareerInitial());
 
-  Future<void> loadCareers({String? search}) async {
+  Future<void> loadCatalog() async {
     emit(CareerLoading());
     try {
-      final careers = await _repository.getCareers(search: search);
+      final catalog = await _repository.getCatalog();
+      if (catalog.isEmpty) {
+        emit(CareerEmpty());
+        return;
+      }
+      final all = catalog.values.expand((e) => e).toList();
+      emit(CareerCatalogLoaded(
+        byCategory: catalog,
+        categories: catalog.keys.toList(),
+        all: all,
+      ));
+    } catch (e) {
+      emit(CareerError(e.toString()));
+    }
+  }
+
+  Future<void> loadCareers({String? search, String? category}) async {
+    emit(CareerLoading());
+    try {
+      final careers =
+          await _repository.getCareers(search: search, category: category);
       if (careers.isEmpty) {
         emit(CareerEmpty());
       } else {

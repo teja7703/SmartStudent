@@ -30,4 +30,11 @@ class ApiClient {
   }) {
     return _dio.post(path, data: data);
   }
+
+  Future<Response<dynamic>> put(
+    String path, {
+    dynamic data,
+  }) {
+    return _dio.put(path, data: data);
+  }
 }

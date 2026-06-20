@@ -4,192 +4,287 @@ import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../core/widgets/app_card.dart';
-import '../../../core/widgets/error_state_widget.dart';
-import '../../../core/widgets/loading_widget.dart';
-import '../cubit/quiz_cubit.dart';
-import '../cubit/quiz_state.dart';
+import '../cubit/quiz_play_cubit.dart';
+import '../cubit/quiz_play_state.dart';
+import '../quiz_ui.dart';
 
-class QuizPlayScreen extends StatefulWidget {
-  final String quizId;
-
-  const QuizPlayScreen({super.key, required this.quizId});
-
-  @override
-  State<QuizPlayScreen> createState() => _QuizPlayScreenState();
-}
-
-class _QuizPlayScreenState extends State<QuizPlayScreen> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<QuizCubit>().loadQuiz(widget.quizId);
-  }
+class QuizPlayScreen extends StatelessWidget {
+  const QuizPlayScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<QuizCubit, QuizState>(
+    return BlocConsumer<QuizPlayCubit, QuizPlayState>(
+      listenWhen: (prev, curr) => curr.status == QuizPlayStatus.finished,
+      listener: (context, state) {
+        if (state.result != null) {
+          context.pushReplacement('/quizzes/result', extra: state.result);
+        }
+      },
       builder: (context, state) {
-        if (state is QuizLoading) {
-          return Scaffold(
-            appBar: AppBar(title: const Text('Quiz')),
-            body: const LoadingWidget(),
-          );
-        }
-        if (state is QuizError) {
-          return Scaffold(
-            appBar: AppBar(title: const Text('Quiz')),
-            body: ErrorStateWidget(
-              message: state.message,
-              onRetry: () => context.read<QuizCubit>().loadQuiz(widget.quizId),
-            ),
-          );
-        }
-        if (state is QuizPlayLoaded) {
-          final quiz = state.quiz;
-          return Scaffold(
+        final quiz = state.quiz;
+        final question = quiz.questions[state.currentIndex];
+        final color = QuizUi.subjectColor(quiz.subject);
+        final lowTime = state.secondsRemaining <= 10;
+
+        return PopScope(
+          canPop: false,
+          onPopInvokedWithResult: (didPop, _) async {
+            if (didPop) return;
+            final leave = await _confirmExit(context);
+            if (leave == true && context.mounted) context.pop();
+          },
+          child: Scaffold(
             appBar: AppBar(
-              title: const Text('Quiz'),
+              title: Text('${QuizUi.classLabel(quiz.classLevel)} • ${quiz.subject}'),
+              leading: IconButton(
+                icon: const Icon(Icons.close_rounded),
+                onPressed: () async {
+                  final leave = await _confirmExit(context);
+                  if (leave == true && context.mounted) context.pop();
+                },
+              ),
               actions: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 16),
-                  child: Center(
-                    child: Text(
-                      '${quiz.points} pts',
-                      style: AppTextStyles.labelLarge.copyWith(
-                        color: AppColors.secondaryGreen,
-                      ),
+                Center(
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 12),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: (lowTime ? AppColors.accentRed : color)
+                          .withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.timer_outlined,
+                          size: 16,
+                          color: lowTime ? AppColors.accentRed : color,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          QuizUi.formatDuration(state.secondsRemaining),
+                          style: AppTextStyles.labelLarge.copyWith(
+                            color: lowTime ? AppColors.accentRed : color,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ],
             ),
-            body: SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      _chip(quiz.category, AppColors.primaryBlue),
-                      const SizedBox(width: 8),
-                      _chip(quiz.difficulty, AppColors.accentOrange),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  AppCard(
-                    child: Text(quiz.question, style: AppTextStyles.headlineMedium),
-                  ),
-                  const SizedBox(height: 20),
-                  ...quiz.options.map((option) {
-                    final isSelected = state.selectedAnswer == option;
-                    final isCorrect = option == quiz.correctAnswer;
-                    Color? borderColor;
-                    Color? bgColor;
-
-                    if (state.isAnswered) {
-                      if (isCorrect) {
-                        borderColor = AppColors.secondaryGreen;
-                        bgColor = AppColors.secondaryGreen.withValues(alpha: 0.1);
-                      } else if (isSelected) {
-                        borderColor = AppColors.accentRed;
-                        bgColor = AppColors.accentRed.withValues(alpha: 0.1);
-                      }
-                    } else if (isSelected) {
-                      borderColor = AppColors.primaryBlue;
-                      bgColor = AppColors.primaryBlue.withValues(alpha: 0.08);
-                    }
-
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: AppCard(
-                        onTap: state.isAnswered
-                            ? null
-                            : () => context.read<QuizCubit>().selectAnswer(option),
-                        color: bgColor,
-                        child: Row(
-                          children: [
-                            Icon(
-                              state.isAnswered && isCorrect
-                                  ? Icons.check_circle_rounded
-                                  : state.isAnswered && isSelected
-                                      ? Icons.cancel_rounded
-                                      : Icons.circle_outlined,
-                              color: borderColor ?? AppColors.textHint,
-                              size: 22,
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Text(option, style: AppTextStyles.bodyLarge),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }),
-                  if (state.isAnswered) ...[
-                    const SizedBox(height: 8),
-                    AppCard(
-                      color: state.isCorrect
-                          ? AppColors.secondaryGreen.withValues(alpha: 0.1)
-                          : AppColors.accentRed.withValues(alpha: 0.1),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            state.isCorrect ? 'Correct!' : 'Incorrect',
-                            style: AppTextStyles.titleLarge.copyWith(
-                              color: state.isCorrect
-                                  ? AppColors.secondaryGreen
-                                  : AppColors.accentRed,
-                            ),
+            body: Column(
+              children: [
+                _ProgressHeader(state: state, color: color),
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AppCard(
+                          color: color.withValues(alpha: 0.08),
+                          child: Text(
+                            question.question,
+                            style: AppTextStyles.headlineMedium,
                           ),
-                          if (quiz.explanation.isNotEmpty) ...[
-                            const SizedBox(height: 8),
-                            Text(quiz.explanation, style: AppTextStyles.bodyMedium),
-                          ],
-                        ],
-                      ),
+                        ),
+                        const SizedBox(height: 20),
+                        ...List.generate(question.options.length, (i) {
+                          final option = question.options[i];
+                          final selected = state.selectedForCurrent == option;
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 12),
+                            child: AppCard(
+                              color: selected
+                                  ? color.withValues(alpha: 0.12)
+                                  : null,
+                              onTap: () => context
+                                  .read<QuizPlayCubit>()
+                                  .selectOption(option),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 28,
+                                    height: 28,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: selected
+                                          ? color
+                                          : AppColors.divider,
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      String.fromCharCode(65 + i),
+                                      style: AppTextStyles.labelLarge.copyWith(
+                                        color: selected
+                                            ? Colors.white
+                                            : AppColors.textSecondary,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Text(
+                                      option,
+                                      style: AppTextStyles.bodyLarge,
+                                    ),
+                                  ),
+                                  if (selected)
+                                    Icon(Icons.check_circle_rounded,
+                                        color: color, size: 22),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                      ],
                     ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          context.read<QuizCubit>().showScore(
-                                score: state.isCorrect ? 1 : 0,
-                                total: 1,
-                                points: state.isCorrect ? quiz.points : 0,
-                              );
-                          context.push('/quizzes/score');
-                        },
-                        child: const Text('View Score'),
-                      ),
-                    ),
-                  ],
-                ],
-              ),
+                  ),
+                ),
+                _NavBar(state: state, color: color),
+              ],
             ),
-          );
-        }
-        return const SizedBox.shrink();
+          ),
+        );
       },
     );
   }
 
-  Widget _chip(String label, Color color) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(20),
+  Future<bool?> _confirmExit(BuildContext context) {
+    return showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Quit quiz?'),
+        content: const Text(
+          'Your progress in this quiz will be lost. Are you sure you want to leave?',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(false),
+            child: const Text('Stay'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(true),
+            child: const Text('Quit'),
+          ),
+        ],
       ),
-      child: Text(
-        label,
-        style: AppTextStyles.labelMedium.copyWith(
-          color: color,
-          fontWeight: FontWeight.w600,
+    );
+  }
+}
+
+class _ProgressHeader extends StatelessWidget {
+  final QuizPlayState state;
+  final Color color;
+
+  const _ProgressHeader({required this.state, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                'Question ${state.currentIndex + 1} of ${state.quiz.totalQuestions}',
+                style: AppTextStyles.labelLarge,
+              ),
+              const Spacer(),
+              Text(
+                '${state.answeredCount} answered',
+                style: AppTextStyles.labelMedium,
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: LinearProgressIndicator(
+              value: state.progress,
+              minHeight: 8,
+              backgroundColor: AppColors.divider,
+              valueColor: AlwaysStoppedAnimation(color),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _NavBar extends StatelessWidget {
+  final QuizPlayState state;
+  final Color color;
+
+  const _NavBar({required this.state, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.read<QuizPlayCubit>();
+    return SafeArea(
+      top: false,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          children: [
+            if (!state.isFirstQuestion) ...[
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: cubit.previous,
+                  icon: const Icon(Icons.arrow_back_rounded),
+                  label: const Text('Previous'),
+                ),
+              ),
+              const SizedBox(width: 12),
+            ],
+            Expanded(
+              child: state.isLastQuestion
+                  ? ElevatedButton.icon(
+                      onPressed: () => _confirmSubmit(context, cubit),
+                      icon: const Icon(Icons.flag_rounded),
+                      label: const Text('Submit'),
+                    )
+                  : ElevatedButton.icon(
+                      onPressed: cubit.next,
+                      icon: const Icon(Icons.arrow_forward_rounded),
+                      label: const Text('Next'),
+                    ),
+            ),
+          ],
         ),
       ),
     );
+  }
+
+  Future<void> _confirmSubmit(BuildContext context, QuizPlayCubit cubit) async {
+    final remaining = state.quiz.totalQuestions - state.answeredCount;
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Submit quiz?'),
+        content: Text(
+          remaining > 0
+              ? 'You have $remaining unanswered question(s). Submit anyway?'
+              : 'You have answered all questions. Submit your quiz?',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(true),
+            child: const Text('Submit'),
+          ),
+        ],
+      ),
+    );
+    if (confirm == true) cubit.submit();
   }
 }

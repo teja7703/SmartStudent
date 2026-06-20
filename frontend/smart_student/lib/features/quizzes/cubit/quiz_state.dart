@@ -12,23 +12,6 @@ class QuizInitial extends QuizState {}
 
 class QuizLoading extends QuizState {}
 
-class QuizLoaded extends QuizState {
-  final List<QuizModel> quizzes;
-  final String? classLevel;
-  final String? category;
-  final String? difficulty;
-
-  const QuizLoaded({
-    required this.quizzes,
-    this.classLevel,
-    this.category,
-    this.difficulty,
-  });
-
-  @override
-  List<Object?> get props => [quizzes, classLevel, category, difficulty];
-}
-
 class QuizEmpty extends QuizState {}
 
 class QuizError extends QuizState {
@@ -40,47 +23,28 @@ class QuizError extends QuizState {
   List<Object?> get props => [message];
 }
 
-class QuizPlayLoaded extends QuizState {
-  final QuizModel quiz;
-  final String? selectedAnswer;
-  final bool isAnswered;
-  final bool isCorrect;
+class QuizCatalogLoaded extends QuizState {
+  final Map<String, List<QuizModel>> byClass;
+  final List<String> classes;
+  final String selectedClass;
 
-  const QuizPlayLoaded({
-    required this.quiz,
-    this.selectedAnswer,
-    this.isAnswered = false,
-    this.isCorrect = false,
+  const QuizCatalogLoaded({
+    required this.byClass,
+    required this.classes,
+    required this.selectedClass,
   });
 
-  QuizPlayLoaded copyWith({
-    String? selectedAnswer,
-    bool? isAnswered,
-    bool? isCorrect,
-  }) {
-    return QuizPlayLoaded(
-      quiz: quiz,
-      selectedAnswer: selectedAnswer ?? this.selectedAnswer,
-      isAnswered: isAnswered ?? this.isAnswered,
-      isCorrect: isCorrect ?? this.isCorrect,
+  List<QuizModel> get quizzesForSelectedClass =>
+      byClass[selectedClass] ?? const [];
+
+  QuizCatalogLoaded copyWith({String? selectedClass}) {
+    return QuizCatalogLoaded(
+      byClass: byClass,
+      classes: classes,
+      selectedClass: selectedClass ?? this.selectedClass,
     );
   }
 
   @override
-  List<Object?> get props => [quiz, selectedAnswer, isAnswered, isCorrect];
-}
-
-class QuizScoreState extends QuizState {
-  final int score;
-  final int total;
-  final int pointsEarned;
-
-  const QuizScoreState({
-    required this.score,
-    required this.total,
-    required this.pointsEarned,
-  });
-
-  @override
-  List<Object?> get props => [score, total, pointsEarned];
+  List<Object?> get props => [byClass, classes, selectedClass];
 }

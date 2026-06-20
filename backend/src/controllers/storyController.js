@@ -35,7 +35,13 @@ const getStories = async (req, res) => {
             },
           },
           {
-            description: {
+            name: {
+              $regex: search,
+              $options: 'i',
+            },
+          },
+          {
+            summary: {
               $regex: search,
               $options: 'i',
             },

@@ -8,15 +8,23 @@ const userSchema = new mongoose.Schema(
       unique: true,
     },
 
+    // Optional because phone-only users may not have an email.
     email: {
       type: String,
-      required: true,
       unique: true,
+      sparse: true,
+    },
+
+    // Optional because Google users may not have a phone number.
+    phone: {
+      type: String,
+      unique: true,
+      sparse: true,
     },
 
     name: {
       type: String,
-      required: true,
+      default: 'Student',
     },
 
     photoUrl: {

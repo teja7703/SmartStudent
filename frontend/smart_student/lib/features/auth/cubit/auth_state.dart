@@ -23,6 +23,36 @@ class AuthAuthenticated extends AuthState {
 
 class AuthUnauthenticated extends AuthState {}
 
+/// Emitted while an OTP request is in-flight (e.g. sending / verifying).
+class AuthOtpInProgress extends AuthState {
+  final String? verificationId;
+  final String phoneNumber;
+
+  const AuthOtpInProgress({
+    this.verificationId,
+    required this.phoneNumber,
+  });
+
+  @override
+  List<Object?> get props => [verificationId, phoneNumber];
+}
+
+/// Emitted once Firebase has sent the SMS code; UI shows the OTP entry step.
+class AuthCodeSent extends AuthState {
+  final String verificationId;
+  final String phoneNumber;
+  final int? resendToken;
+
+  const AuthCodeSent({
+    required this.verificationId,
+    required this.phoneNumber,
+    this.resendToken,
+  });
+
+  @override
+  List<Object?> get props => [verificationId, phoneNumber, resendToken];
+}
+
 class AuthError extends AuthState {
   final String message;
 

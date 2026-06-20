@@ -18,7 +18,7 @@ const createCareer = async (req, res) => {
 
 const getCareers = async (req, res) => {
     try {
-      const { search, page = 1, limit = 10 } = req.query;
+      const { search, category, page = 1, limit = 100 } = req.query;
   
       const filter = {};
   
@@ -27,6 +27,10 @@ const getCareers = async (req, res) => {
           $regex: search,
           $options: 'i',
         };
+      }
+
+      if (category) {
+        filter.category = category;
       }
   
       const pageNumber = parseInt(page);
@@ -37,6 +41,7 @@ const getCareers = async (req, res) => {
       const totalRecords = await Career.countDocuments(filter);
   
       const careers = await Career.find(filter)
+        .sort({ order: 1, careerName: 1 })
         .skip(skip)
         .limit(limitNumber);
   

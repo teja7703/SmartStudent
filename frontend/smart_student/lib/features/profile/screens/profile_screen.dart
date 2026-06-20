@@ -4,9 +4,13 @@ import 'package:go_router/go_router.dart';
 import '../../../core/services/storage_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
+import '../../../core/utils/avatar_image.dart';
 import '../../../core/widgets/app_card.dart';
 import '../../auth/cubit/auth_cubit.dart';
 import '../../auth/cubit/auth_state.dart';
+import '../../auth/models/user_model.dart';
+import '../../progress/cubit/progress_cubit.dart';
+import '../../progress/models/progress_stats.dart';
 import '../../../injection.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -19,162 +23,167 @@ class ProfileScreen extends StatelessWidget {
         final user = state is AuthAuthenticated ? state.user : null;
 
         return Scaffold(
-          appBar: AppBar(title: const Text('Profile')),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                AppCard(
-                  child: Column(
-                    children: [
-                      CircleAvatar(
-                        radius: 48,
-                        backgroundColor: AppColors.primaryBlue.withValues(alpha: 0.1),
-                        backgroundImage: user?.photoUrl.isNotEmpty == true
-                            ? NetworkImage(user!.photoUrl)
-                            : null,
-                        child: user?.photoUrl.isEmpty != false
-                            ? const Icon(Icons.person, size: 48, color: AppColors.primaryBlue)
-                            : null,
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        user?.name ?? 'Student',
-                        style: AppTextStyles.headlineMedium,
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        user?.email ?? '',
-                        style: AppTextStyles.bodyMedium,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Row(
+          body: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              _Header(user: user),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: _profileStat(
-                        icon: Icons.local_fire_department_rounded,
-                        label: 'Streak',
-                        value: '${user?.streak ?? 0} days',
-                        color: AppColors.accentOrange,
+                    _GroupLabel('Account'),
+                    _MenuTile(
+                      icon: Icons.edit_rounded,
+                      color: AppColors.primaryBlue,
+                      title: 'Edit Profile',
+                      subtitle: 'Update your name & photo',
+                      onTap: () => context.push('/profile/edit'),
+                    ),
+                    _MenuTile(
+                      icon: Icons.translate_rounded,
+                      color: AppColors.accentPurple,
+                      title: 'Change Language',
+                      subtitle: 'English / తెలుగు',
+                      onTap: () => _changeLanguage(context),
+                    ),
+                    const SizedBox(height: 16),
+                    _GroupLabel('Learning'),
+                    _MenuTile(
+                      icon: Icons.quiz_rounded,
+                      color: AppColors.secondaryGreen,
+                      title: 'Quiz History',
+                      subtitle: 'Your past attempts & analytics',
+                      onTap: () => context.push('/quizzes/history'),
+                    ),
+                    _MenuTile(
+                      icon: Icons.bookmark_rounded,
+                      color: AppColors.accentOrange,
+                      title: 'Saved Materials',
+                      subtitle: 'Your bookmarked stories',
+                      onTap: () => _showSaved(context),
+                    ),
+                    _MenuTile(
+                      icon: Icons.download_rounded,
+                      color: AppColors.primaryBlueLight,
+                      title: 'Download History',
+                      subtitle: 'PDFs you downloaded',
+                      onTap: () => _comingSoon(context, 'Download History'),
+                    ),
+                    const SizedBox(height: 16),
+                    _GroupLabel('More'),
+                    _MenuTile(
+                      icon: Icons.settings_rounded,
+                      color: AppColors.textSecondary,
+                      title: 'App Settings',
+                      subtitle: 'Notifications & preferences',
+                      onTap: () => _comingSoon(context, 'App Settings'),
+                    ),
+                    _MenuTile(
+                      icon: Icons.help_outline_rounded,
+                      color: AppColors.accentRed,
+                      title: 'Help & Support',
+                      subtitle: 'Get help and contact us',
+                      onTap: () => _showHelp(context),
+                    ),
+                    const SizedBox(height: 24),
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton.icon(
+                        onPressed: () async {
+                          await context.read<AuthCubit>().signOut();
+                          if (context.mounted) context.go('/login');
+                        },
+                        icon: const Icon(Icons.logout_rounded,
+                            color: AppColors.accentRed),
+                        label: Text(
+                          'Logout',
+                          style: AppTextStyles.labelLarge
+                              .copyWith(color: AppColors.accentRed),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: AppColors.accentRed),
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                        ),
                       ),
                     ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: _profileStat(
-                        icon: Icons.star_rounded,
-                        label: 'Points',
-                        value: '${user?.points ?? 0}',
-                        color: AppColors.secondaryGreen,
-                      ),
+                    const SizedBox(height: 16),
+                    Center(
+                      child: Text('Smart Student • v1.0.0',
+                          style: AppTextStyles.labelMedium),
                     ),
+                    const SizedBox(height: 16),
                   ],
                 ),
-                const SizedBox(height: 24),
-                _menuTile(
-                  icon: Icons.quiz_rounded,
-                  title: 'Completed Quizzes',
-                  subtitle: 'View your quiz history',
-                  onTap: () => context.go('/quizzes'),
-                ),
-                _menuTile(
-                  icon: Icons.bookmark_rounded,
-                  title: 'Saved Stories',
-                  subtitle: 'Your bookmarked stories',
-                  onTap: () => _showSavedStories(context),
-                ),
-                _menuTile(
-                  icon: Icons.settings_rounded,
-                  title: 'Settings',
-                  subtitle: 'App preferences',
-                  onTap: () {},
-                ),
-                const SizedBox(height: 24),
-                SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton.icon(
-                    onPressed: () async {
-                      await context.read<AuthCubit>().signOut();
-                      if (context.mounted) context.go('/login');
-                    },
-                    icon: const Icon(Icons.logout_rounded, color: AppColors.accentRed),
-                    label: Text(
-                      'Logout',
-                      style: AppTextStyles.labelLarge.copyWith(color: AppColors.accentRed),
-                    ),
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: AppColors.accentRed),
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },
     );
   }
 
-  Widget _profileStat({
-    required IconData icon,
-    required String label,
-    required String value,
-    required Color color,
-  }) {
-    return AppCard(
-      child: Column(
-        children: [
-          Icon(icon, color: color, size: 28),
-          const SizedBox(height: 8),
-          Text(value, style: AppTextStyles.titleLarge),
-          Text(label, style: AppTextStyles.labelMedium),
+  void _comingSoon(BuildContext context, String feature) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('$feature is coming soon!')),
+    );
+  }
+
+  void _changeLanguage(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) {
+        Widget option(String label, String sub) => ListTile(
+              leading: const Icon(Icons.language_rounded,
+                  color: AppColors.accentPurple),
+              title: Text(label, style: AppTextStyles.titleMedium),
+              subtitle: Text(sub, style: AppTextStyles.labelMedium),
+              onTap: () {
+                Navigator.pop(ctx);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Language preference: $label')),
+                );
+              },
+            );
+        return Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Choose Language', style: AppTextStyles.headlineMedium),
+              const SizedBox(height: 8),
+              option('English', 'Default language'),
+              option('తెలుగు', 'Telugu'),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _showHelp(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Help & Support'),
+        content: const Text(
+          'Need help? Reach us at:\n\nsupport@smartstudent.app\n\nWe usually reply within 24 hours.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Close'),
+          ),
         ],
       ),
     );
   }
 
-  Widget _menuTile({
-    required IconData icon,
-    required String title,
-    required String subtitle,
-    required VoidCallback onTap,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: AppCard(
-        onTap: onTap,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        child: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: AppColors.primaryBlue.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Icon(icon, color: AppColors.primaryBlue, size: 22),
-            ),
-            const SizedBox(width: 14),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(title, style: AppTextStyles.titleMedium),
-                  Text(subtitle, style: AppTextStyles.bodyMedium),
-                ],
-              ),
-            ),
-            const Icon(Icons.chevron_right, color: AppColors.textHint),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Future<void> _showSavedStories(BuildContext context) async {
+  Future<void> _showSaved(BuildContext context) async {
     final storage = getIt<StorageService>();
     final bookmarks = await storage.getBookmarkedStories();
 
@@ -192,14 +201,15 @@ class ProfileScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Saved Stories', style: AppTextStyles.headlineMedium),
+              Text('Saved Materials', style: AppTextStyles.headlineMedium),
               const SizedBox(height: 16),
               if (bookmarks.isEmpty)
-                Text('No saved stories yet.', style: AppTextStyles.bodyMedium)
+                Text('No saved items yet.', style: AppTextStyles.bodyMedium)
               else
                 ...bookmarks.map(
                   (id) => ListTile(
-                    leading: const Icon(Icons.bookmark_rounded, color: AppColors.accentOrange),
+                    leading: const Icon(Icons.bookmark_rounded,
+                        color: AppColors.accentOrange),
                     title: Text('Story $id'),
                     onTap: () {
                       Navigator.pop(context);
@@ -211,6 +221,199 @@ class ProfileScreen extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _Header extends StatelessWidget {
+  final UserModel? user;
+
+  const _Header({required this.user});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
+      decoration: const BoxDecoration(
+        gradient: AppColors.heroGradient,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(30),
+          bottomRight: Radius.circular(30),
+        ),
+      ),
+      child: SafeArea(
+        bottom: false,
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Profile',
+                style: AppTextStyles.titleLarge.copyWith(color: Colors.white),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Builder(
+              builder: (context) {
+                final provider = avatarProvider(user?.photoUrl);
+                return CircleAvatar(
+                  radius: 44,
+                  backgroundColor: Colors.white.withValues(alpha: 0.22),
+                  backgroundImage: provider,
+                  child: provider == null
+                      ? const Icon(Icons.person,
+                          size: 44, color: Colors.white)
+                      : null,
+                );
+              },
+            ),
+            const SizedBox(height: 12),
+            Text(
+              user?.name ?? 'Student',
+              style: AppTextStyles.headlineMedium.copyWith(color: Colors.white),
+            ),
+            if ((user?.email ?? '').isNotEmpty) ...[
+              const SizedBox(height: 4),
+              Text(
+                user!.email,
+                style: AppTextStyles.bodyMedium
+                    .copyWith(color: Colors.white.withValues(alpha: 0.85)),
+              ),
+            ] else if ((user?.phone ?? '').isNotEmpty) ...[
+              const SizedBox(height: 4),
+              Text(
+                user!.phone,
+                style: AppTextStyles.bodyMedium
+                    .copyWith(color: Colors.white.withValues(alpha: 0.85)),
+              ),
+            ],
+            const SizedBox(height: 16),
+            BlocBuilder<ProgressCubit, ProgressStats>(
+              builder: (context, stats) {
+                return Row(
+                  children: [
+                    _StatChip(
+                      icon: Icons.local_fire_department_rounded,
+                      label: '${stats.streak} Day Streak',
+                    ),
+                    const SizedBox(width: 12),
+                    _StatChip(
+                      icon: Icons.star_rounded,
+                      label: '${stats.pointsEarned} Points',
+                    ),
+                  ],
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _StatChip extends StatelessWidget {
+  final IconData icon;
+  final String label;
+
+  const _StatChip({required this.icon, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        decoration: BoxDecoration(
+          color: Colors.white.withValues(alpha: 0.15),
+          borderRadius: BorderRadius.circular(14),
+        ),
+        child: Row(
+          children: [
+            Icon(icon, color: AppColors.accentOrange, size: 20),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                label,
+                style: AppTextStyles.labelMedium.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _GroupLabel extends StatelessWidget {
+  final String label;
+
+  const _GroupLabel(this.label);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10, left: 4),
+      child: Text(
+        label.toUpperCase(),
+        style: AppTextStyles.labelMedium.copyWith(
+          letterSpacing: 1,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+    );
+  }
+}
+
+class _MenuTile extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final String title;
+  final String subtitle;
+  final VoidCallback onTap;
+
+  const _MenuTile({
+    required this.icon,
+    required this.color,
+    required this.title,
+    required this.subtitle,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: AppCard(
+        onTap: onTap,
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(icon, color: color, size: 22),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: AppTextStyles.titleMedium),
+                  Text(subtitle, style: AppTextStyles.bodyMedium),
+                ],
+              ),
+            ),
+            const Icon(Icons.chevron_right, color: AppColors.textHint),
+          ],
+        ),
+      ),
     );
   }
 }

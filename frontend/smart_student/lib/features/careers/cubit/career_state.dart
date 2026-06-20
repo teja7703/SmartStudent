@@ -12,6 +12,21 @@ class CareerInitial extends CareerState {}
 
 class CareerLoading extends CareerState {}
 
+class CareerCatalogLoaded extends CareerState {
+  final Map<String, List<CareerModel>> byCategory;
+  final List<String> categories;
+  final List<CareerModel> all;
+
+  const CareerCatalogLoaded({
+    required this.byCategory,
+    required this.categories,
+    required this.all,
+  });
+
+  @override
+  List<Object?> get props => [byCategory, categories, all];
+}
+
 class CareerLoaded extends CareerState {
   final List<CareerModel> careers;
   final String searchQuery;

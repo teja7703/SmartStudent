@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/constants/academic_constants.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../core/widgets/app_card.dart';
@@ -14,11 +15,13 @@ import '../cubit/study_material_state.dart';
 class StudyMaterialListScreen extends StatefulWidget {
   final String academicLevel;
   final String subject;
+  final String language;
 
   const StudyMaterialListScreen({
     super.key,
     required this.academicLevel,
     required this.subject,
+    this.language = 'English',
   });
 
   @override
@@ -44,14 +47,18 @@ class _StudyMaterialListScreenState extends State<StudyMaterialListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.subject)),
+      appBar: AppBar(
+        title: Text(
+          AcademicConstants.formatSubject(widget.subject, widget.language),
+        ),
+      ),
       body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
             child: AppSearchBar(
               controller: _searchController,
-              hint: 'Search by chapter...',
+              hint: AcademicConstants.searchHint(widget.language),
               onChanged: (value) {
                 context.read<StudyMaterialCubit>().loadMaterials(search: value);
               },
@@ -73,8 +80,9 @@ class _StudyMaterialListScreenState extends State<StudyMaterialListScreen> {
                 if (state is StudyMaterialEmpty) {
                   return EmptyStateWidget(
                     icon: Icons.menu_book_outlined,
-                    title: 'No materials found',
-                    message: 'Try a different search or check back later.',
+                    title: AcademicConstants.noMaterialsTitle(widget.language),
+                    message:
+                        AcademicConstants.noMaterialsMessage(widget.language),
                     onRetry: () =>
                         context.read<StudyMaterialCubit>().loadMaterials(),
                   );
@@ -92,10 +100,12 @@ class _StudyMaterialListScreenState extends State<StudyMaterialListScreen> {
                       itemBuilder: (context, index) {
                         final material = state.materials[index];
                         return AppCard(
-                          onTap: () => context.push(
-                            '/study-materials/detail/${material.id}',
-                            extra: material,
-                          ),
+                          onTap: () {
+                            context.push(
+                              '/study-materials/detail/${material.id}',
+                              extra: material,
+                            );
+                          },
                           child: Row(
                             children: [
                               Container(

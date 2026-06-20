@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'features/auth/cubit/auth_cubit.dart';
 import 'features/auth/cubit/auth_state.dart';
 import 'features/auth/screens/login_screen.dart';
+import 'features/careers/screens/career_category_screen.dart';
 import 'features/careers/screens/career_detail_screen.dart';
 import 'features/careers/screens/careers_screen.dart';
 import 'features/home/screens/home_screen.dart';
@@ -12,13 +13,21 @@ import 'features/previous_papers/screens/previous_paper_detail_screen.dart';
 import 'features/previous_papers/screens/previous_paper_levels_screen.dart';
 import 'features/previous_papers/screens/previous_paper_list_screen.dart';
 import 'features/previous_papers/screens/previous_paper_subjects_screen.dart';
+import 'features/profile/screens/edit_profile_screen.dart';
 import 'features/profile/screens/profile_screen.dart';
+import 'features/search/screens/search_screen.dart';
+import 'features/spoken_english/screens/spoken_english_screen.dart';
+import 'features/quizzes/models/quiz_model.dart';
+import 'features/quizzes/models/quiz_result_model.dart';
+import 'features/quizzes/screens/quiz_history_screen.dart';
 import 'features/quizzes/screens/quiz_play_screen.dart';
-import 'features/quizzes/screens/quiz_score_screen.dart';
+import 'features/quizzes/screens/quiz_result_screen.dart';
+import 'features/quizzes/screens/quiz_review_screen.dart';
 import 'features/quizzes/screens/quizzes_screen.dart';
 import 'features/stories/screens/stories_screen.dart';
 import 'features/stories/screens/story_detail_screen.dart';
 import 'features/study_materials/models/study_material_model.dart';
+import 'features/study_materials/screens/language_select_screen.dart';
 import 'features/study_materials/screens/study_levels_screen.dart';
 import 'features/study_materials/screens/study_material_detail_screen.dart';
 import 'features/study_materials/screens/study_material_list_screen.dart';
@@ -69,13 +78,19 @@ GoRouter createRouter(AuthCubit authCubit) {
           GoRoute(
             path: '/study-materials',
             pageBuilder: (context, state) => const NoTransitionPage(
-              child: StudyLevelsScreen(),
+              child: LanguageSelectScreen(),
             ),
           ),
           GoRoute(
             path: '/quizzes',
             pageBuilder: (context, state) => const NoTransitionPage(
               child: QuizzesScreen(),
+            ),
+          ),
+          GoRoute(
+            path: '/careers',
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: CareersScreen(),
             ),
           ),
           GoRoute(
@@ -87,34 +102,45 @@ GoRouter createRouter(AuthCubit authCubit) {
         ],
       ),
       GoRoute(
-        path: '/study-materials/:level/subjects',
+        path: '/study-materials/detail/:id',
         builder: (context, state) {
-          final level = state.pathParameters['level']!;
-          return SubjectsScreen(academicLevel: level);
+          final material = state.extra as StudyMaterialModel;
+          return StudyMaterialDetailScreen(material: material);
         },
       ),
       GoRoute(
-        path: '/study-materials/:level/:subject',
+        path: '/study-materials/:lang/levels',
         builder: (context, state) {
+          final lang = state.pathParameters['lang']!;
+          return StudyLevelsScreen(language: lang);
+        },
+      ),
+      GoRoute(
+        path: '/study-materials/:lang/:level/subjects',
+        builder: (context, state) {
+          final lang = state.pathParameters['lang']!;
+          final level = state.pathParameters['level']!;
+          return SubjectsScreen(academicLevel: level, language: lang);
+        },
+      ),
+      GoRoute(
+        path: '/study-materials/:lang/:level/:subject',
+        builder: (context, state) {
+          final lang = state.pathParameters['lang']!;
           final level = state.pathParameters['level']!;
           final subject = state.pathParameters['subject']!;
           return BlocProvider(
             create: (_) => createStudyMaterialCubit(
               academicLevel: level,
               subject: subject,
+              language: lang,
             ),
             child: StudyMaterialListScreen(
               academicLevel: level,
               subject: subject,
+              language: lang,
             ),
           );
-        },
-      ),
-      GoRoute(
-        path: '/study-materials/detail/:id',
-        builder: (context, state) {
-          final material = state.extra as StudyMaterialModel;
-          return StudyMaterialDetailScreen(material: material);
         },
       ),
       GoRoute(
@@ -126,6 +152,13 @@ GoRouter createRouter(AuthCubit authCubit) {
         builder: (context, state) {
           final level = state.pathParameters['level']!;
           return PreviousPaperSubjectsScreen(academicLevel: level);
+        },
+      ),
+      GoRoute(
+        path: '/previous-papers/detail/:id',
+        builder: (context, state) {
+          final paper = state.extra as PreviousPaperModel;
+          return PreviousPaperDetailScreen(paper: paper);
         },
       ),
       GoRoute(
@@ -146,21 +179,24 @@ GoRouter createRouter(AuthCubit authCubit) {
         },
       ),
       GoRoute(
-        path: '/previous-papers/detail/:id',
+        path: '/careers/category/:category',
         builder: (context, state) {
-          final paper = state.extra as PreviousPaperModel;
-          return PreviousPaperDetailScreen(paper: paper);
+          final category =
+              Uri.decodeComponent(state.pathParameters['category']!);
+          return BlocProvider(
+            create: (_) => createCareerCubit(),
+            child: CareerCategoryScreen(category: category),
+          );
         },
-      ),
-      GoRoute(
-        path: '/careers',
-        builder: (context, state) => const CareersScreen(),
       ),
       GoRoute(
         path: '/careers/:id',
         builder: (context, state) {
           final id = state.pathParameters['id']!;
-          return CareerDetailScreen(careerId: id);
+          return BlocProvider(
+            create: (_) => createCareerCubit(),
+            child: CareerDetailScreen(careerId: id),
+          );
         },
       ),
       GoRoute(
@@ -171,19 +207,51 @@ GoRouter createRouter(AuthCubit authCubit) {
         path: '/stories/:id',
         builder: (context, state) {
           final id = state.pathParameters['id']!;
-          return StoryDetailScreen(storyId: id);
+          return BlocProvider(
+            create: (_) => createStoryCubit(),
+            child: StoryDetailScreen(storyId: id),
+          );
         },
       ),
       GoRoute(
-        path: '/quizzes/play/:id',
+        path: '/quizzes/play',
         builder: (context, state) {
-          final id = state.pathParameters['id']!;
-          return QuizPlayScreen(quizId: id);
+          final quiz = state.extra as QuizModel;
+          return BlocProvider(
+            create: (_) => createQuizPlayCubit(quiz),
+            child: const QuizPlayScreen(),
+          );
         },
       ),
       GoRoute(
-        path: '/quizzes/score',
-        builder: (context, state) => const QuizScoreScreen(),
+        path: '/quizzes/result',
+        builder: (context, state) {
+          final result = state.extra as QuizResultModel;
+          return QuizResultScreen(result: result);
+        },
+      ),
+      GoRoute(
+        path: '/quizzes/review',
+        builder: (context, state) {
+          final result = state.extra as QuizResultModel;
+          return QuizReviewScreen(result: result);
+        },
+      ),
+      GoRoute(
+        path: '/quizzes/history',
+        builder: (context, state) => const QuizHistoryScreen(),
+      ),
+      GoRoute(
+        path: '/profile/edit',
+        builder: (context, state) => const EditProfileScreen(),
+      ),
+      GoRoute(
+        path: '/search',
+        builder: (context, state) => const SearchScreen(),
+      ),
+      GoRoute(
+        path: '/spoken-english',
+        builder: (context, state) => const SpokenEnglishScreen(),
       ),
       GoRoute(
         path: '/coming-soon/:feature',

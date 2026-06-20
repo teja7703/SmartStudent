@@ -1,0 +1,173 @@
+[
+  {
+    "name": "A. P. J. Abdul Kalam",
+    "category": "Scientist",
+    "title": "From Newspaper Boy to People's President",
+    "summary": "Dr. A.P.J. Abdul Kalam was born in a humble family in Rameswaram, Tamil Nadu. During his childhood, he sold newspapers to support his family while continuing his education. Despite financial difficulties, he remained dedicated to learning and developed a strong interest in science and technology. After completing his studies, he joined India's space and defense programs and played a key role in developing India's missile technology. His contributions earned him the title 'Missile Man of India'. Later, he became the 11th President of India and inspired millions of students through his speeches and books. He believed that every student has the potential to achieve greatness through hard work and determination.",
+    "successLesson": "Never let your background limit your dreams. Education and persistence can change your future.",
+    "quote": "Dream is not what you see in sleep, it is the thing which does not let you sleep.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/A._P._J._Abdul_Kalam.jpg/330px-A._P._J._Abdul_Kalam.jpg"
+  },
+  {
+    "name": "Srinivasa Ramanujan",
+    "category": "Mathematics",
+    "title": "The Self-Taught Mathematical Genius",
+    "summary": "Srinivasa Ramanujan was born in Tamil Nadu and displayed extraordinary mathematical talent from a very young age. He had limited access to higher education and often studied mathematics independently. Despite facing financial struggles and academic challenges in other subjects, he continued his mathematical research. His work eventually caught the attention of renowned mathematician G.H. Hardy from Cambridge University. Ramanujan made significant contributions to number theory, infinite series, and mathematical analysis. Many of his discoveries continue to influence modern mathematics. His life story demonstrates how passion, curiosity, and self-learning can lead to extraordinary achievements.",
+    "successLesson": "Passion and dedication can help you achieve greatness even when resources are limited.",
+    "quote": "An equation means nothing to me unless it expresses a thought of God.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Srinivasa_Ramanujan-Add._MS_a94_version2_%28cropped%29.jpg/330px-Srinivasa_Ramanujan-Add._MS_a94_version2_%28cropped%29.jpg"
+  },
+  {
+    "name": "Virat Kohli",
+    "category": "Sports",
+    "title": "The Power of Discipline and Consistency",
+    "summary": "Virat Kohli is one of India's most successful cricketers. From a young age, he dedicated himself to cricket and spent countless hours practicing. During his teenage years, he faced personal challenges, including the loss of his father, but he continued pursuing his dream with determination. Through discipline, fitness, and consistent performance, he became captain of the Indian cricket team and one of the world's best batsmen. His journey teaches students that success is not achieved overnight but through continuous effort and self-improvement.",
+    "successLesson": "Consistency and discipline are more important than talent alone.",
+    "quote": "Self-belief and hard work will always earn you success.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Virat_Kohli_in_PMO_New_Delhi.jpg/330px-Virat_Kohli_in_PMO_New_Delhi.jpg"
+  },
+  {
+    "name": "Sundar Pichai",
+    "category": "Technology",
+    "title": "From Chennai to CEO of Google",
+    "summary": "Sundar Pichai grew up in a middle-class family in Chennai. He studied engineering and later earned scholarships to pursue higher education abroad. Through his intelligence, leadership skills, and dedication, he joined Google and contributed to several successful products including Google Chrome. His exceptional performance helped him rise through the organization and eventually become CEO of Google and Alphabet. His story shows that students from ordinary backgrounds can achieve global success through education and hard work.",
+    "successLesson": "Focus on learning, stay humble, and keep improving every day.",
+    "quote": "Wear your failure as a badge of honor.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Sundar_Pichai_-_2023_%28cropped%29.jpg/330px-Sundar_Pichai_-_2023_%28cropped%29.jpg"
+  },
+  {
+    "name": "P. V. Sindhu",
+    "category": "Sports",
+    "title": "India's Badminton Champion",
+    "summary": "P.V. Sindhu is one of India's most successful badminton players. She started training at a young age and followed a strict daily practice schedule. Her dedication and determination helped her become an Olympic medalist and world champion. Despite facing tough competition from the world's best players, she continued improving her game and achieved remarkable success. Her journey inspires students to remain focused on their goals and work hard even when success seems difficult.",
+    "successLesson": "Success comes to those who stay committed to their goals and never stop practicing.",
+    "quote": "Hard work beats talent when talent doesn't work hard.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/NAC_Jewellers_Honors_Olympic_Silver_Medalist_PV_Sindhu.jpg/330px-NAC_Jewellers_Honors_Olympic_Silver_Medalist_PV_Sindhu.jpg"
+  },
+  {
+    "name": "Ratan Tata",
+    "category": "Entrepreneur",
+    "title": "Leading with Vision and Values",
+    "summary": "Ratan Tata is one of India's most respected business leaders. Under his leadership, the Tata Group expanded globally and acquired international companies such as Jaguar Land Rover and Corus. Despite managing one of India's largest business groups, he remained humble and focused on ethical leadership. He also contributed significantly to education, healthcare, and social welfare through Tata Trusts. His life demonstrates that true success comes from combining business excellence with social responsibility.",
+    "successLesson": "Success is meaningful when it creates value for society.",
+    "quote": "I don't believe in taking right decisions. I take decisions and then make them right.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Shri_Ratan_Naval_Tata.jpg/330px-Shri_Ratan_Naval_Tata.jpg"
+  },
+  {
+    "name": "Satya Nadella",
+    "category": "Technology",
+    "title": "Transforming Microsoft Through Innovation",
+    "summary": "Satya Nadella was born in Hyderabad and pursued engineering before moving to the United States for higher education. He joined Microsoft and worked in various leadership roles before becoming CEO. Under his leadership, Microsoft embraced cloud computing and artificial intelligence, becoming one of the world's most valuable companies. His focus on continuous learning, empathy, and innovation has inspired professionals across the globe.",
+    "successLesson": "Never stop learning and adapting to change.",
+    "quote": "Be passionate and bold. Always keep learning.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/MS-Exec-Nadella-Satya-2017-08-31-22_%28cropped%29.jpg/330px-MS-Exec-Nadella-Satya-2017-08-31-22_%28cropped%29.jpg"
+  },
+  {
+    "name": "Kalpana Chawla",
+    "category": "Science",
+    "title": "The Girl Who Reached the Stars",
+    "summary": "Kalpana Chawla was born in Karnal, India, and dreamed of flying from a young age. Through dedication and hard work, she became an aerospace engineer and later joined NASA as an astronaut. She became the first woman of Indian origin in space and inspired millions of students worldwide. Her courage and determination continue to motivate young learners to pursue ambitious goals in science and technology.",
+    "successLesson": "Dream big and work fearlessly toward your goals.",
+    "quote": "The path from dreams to success does exist.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Kalpana_Chawla%2C_NASA_photo_portrait_in_orange_suit.jpg/330px-Kalpana_Chawla%2C_NASA_photo_portrait_in_orange_suit.jpg"
+  },
+  {
+    "name": "Srikanth Bolla",
+    "category": "Entrepreneur",
+    "title": "Turning Disability into Strength",
+    "summary": "Born visually impaired, Srikanth Bolla faced discrimination and numerous challenges throughout his education. Despite these obstacles, he excelled academically and became the first international blind student at MIT. Later, he founded Bollant Industries, creating employment opportunities for people with disabilities. His story proves that limitations exist only when we stop believing in ourselves.",
+    "successLesson": "Challenges can become your greatest strengths.",
+    "quote": "Don't let others define your limits.",
+    "imageUrl": ""
+  },
+  {
+    "name": "Neeraj Chopra",
+    "category": "Sports",
+    "title": "India's Golden Javelin Hero",
+    "summary": "Neeraj Chopra grew up in a small village and developed an interest in athletics at a young age. Through years of disciplined training and perseverance, he became India's first Olympic gold medalist in athletics. His achievement brought pride to the nation and inspired thousands of young athletes. His journey shows that determination and consistency can lead to world-class success.",
+    "successLesson": "Stay committed to your goals regardless of obstacles.",
+    "quote": "Focus on improvement every single day.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Neeraj_Chopra_Olympic_gold_medalist.jpg"
+  },
+  {
+    "name": "N. R. Narayana Murthy",
+    "category": "Entrepreneur",
+    "title": "Building Infosys from Scratch",
+    "summary": "Narayana Murthy co-founded Infosys with a vision of creating a world-class technology company from India. Starting with limited resources, he focused on innovation, transparency, and strong values. Infosys eventually became one of the most respected IT companies globally. His story highlights the importance of vision, teamwork, and ethical leadership.",
+    "successLesson": "Strong values are the foundation of lasting success.",
+    "quote": "Performance leads to recognition.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Narayana_Murthy_CIF_%28cropped%29.JPG/330px-Narayana_Murthy_CIF_%28cropped%29.JPG"
+  },
+  {
+    "name": "Kiran Bedi",
+    "category": "Civil Services",
+    "title": "Breaking Barriers Through Courage",
+    "summary": "Kiran Bedi became India's first woman IPS officer and paved the way for future generations of women in public service. Throughout her career, she implemented innovative reforms and demonstrated exceptional leadership. Her dedication to justice and discipline earned widespread respect. She remains a role model for students aspiring to serve society.",
+    "successLesson": "Courage and integrity create lasting impact.",
+    "quote": "What matters is how quickly you do what is right.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Dr._Kiran_Bedi_in_2017_%28cropped%29.jpg/330px-Dr._Kiran_Bedi_in_2017_%28cropped%29.jpg"
+  },
+  {
+    "name": "Thomas Edison",
+    "category": "Inventor",
+    "title": "The Inventor Who Never Gave Up",
+    "summary": "Thomas Edison is famous for inventing the practical electric bulb and many other devices. He faced thousands of failures during his experiments but viewed each failure as a learning opportunity. His persistence and curiosity led to groundbreaking innovations that transformed modern life. His journey teaches students the importance of perseverance.",
+    "successLesson": "Failure is simply a step toward success.",
+    "quote": "I have not failed. I've just found 10,000 ways that won't work.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Thomas_Edison2.jpg/330px-Thomas_Edison2.jpg"
+  },
+  {
+    "name": "Steve Jobs",
+    "category": "Entrepreneur",
+    "title": "Changing the World Through Creativity",
+    "summary": "Steve Jobs co-founded Apple and revolutionized technology with products like the iPhone, iPad, and Mac. Despite facing setbacks, including being removed from his own company, he returned stronger and transformed Apple into one of the world's most successful businesses. His story highlights the power of creativity, innovation, and resilience.",
+    "successLesson": "Think differently and pursue your vision fearlessly.",
+    "quote": "Stay hungry. Stay foolish.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Steve_Jobs_Headshot_2010_%28cropped_4%29.jpg/330px-Steve_Jobs_Headshot_2010_%28cropped_4%29.jpg"
+  },
+  {
+    "name": "Alluri Sitarama Raju",
+    "category": "Freedom Fighter",
+    "title": "The Brave Revolutionary of Andhra",
+    "summary": "Alluri Sitarama Raju was a fearless freedom fighter who led tribal communities against British rule. He dedicated his life to protecting the rights of oppressed people and inspiring resistance against injustice. His courage, leadership, and sacrifice made him one of Andhra Pradesh's greatest heroes. His life continues to inspire young people to stand for truth and justice.",
+    "successLesson": "True leadership comes from courage and selflessness.",
+    "quote": "A great cause is worth every sacrifice.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Alluri_Sita_Rama_Raju_statue.jpg/330px-Alluri_Sita_Rama_Raju_statue.jpg"
+  },
+  {
+    "name": "Sachin Tendulkar",
+    "category": "Sports",
+    "title": "The Master Blaster's Journey",
+    "summary": "Sachin Tendulkar started playing cricket as a young boy in Mumbai and practiced for hours every day under his coach Ramakant Achrekar. He made his international debut at just 16 years of age. Over a 24-year career, he scored a record 100 international centuries and became known as the 'God of Cricket'. Through dedication, humility, and relentless practice, he inspired an entire generation. His journey shows that consistent effort over many years builds true greatness.",
+    "successLesson": "Greatness is built through years of humble, consistent practice.",
+    "quote": "People throw stones at you and you convert them into milestones.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/The_cricket_legend_Sachin_Tendulkar_at_the_Oval_Maidan_in_Mumbai_During_the_Duke_and_Duchess_of_Cambridge_Visit%2826271019082%29.jpg/330px-The_cricket_legend_Sachin_Tendulkar_at_the_Oval_Maidan_in_Mumbai_During_the_Duke_and_Duchess_of_Cambridge_Visit%2826271019082%29.jpg"
+  },
+  {
+    "name": "Mary Kom",
+    "category": "Sports",
+    "title": "The Unstoppable Boxing Champion",
+    "summary": "Mary Kom grew up in a poor farming family in Manipur. With very few resources, she trained hard in boxing while helping her parents in the fields. Facing gender barriers and financial struggles, she never gave up on her dream. She went on to become a six-time World Champion and an Olympic medalist, even returning to the ring after becoming a mother. Her story proves that determination can overcome any obstacle.",
+    "successLesson": "No obstacle is too big when your determination is strong.",
+    "quote": "Don't say you are weak. You are the best.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Mary_Kom_-_British_High_Commission%2C_Delhi%2C_27_July_2011.jpg/330px-Mary_Kom_-_British_High_Commission%2C_Delhi%2C_27_July_2011.jpg"
+  },
+  {
+    "name": "B. R. Ambedkar",
+    "category": "Leader",
+    "title": "The Architect of the Indian Constitution",
+    "summary": "Dr. B. R. Ambedkar faced severe discrimination during his childhood but refused to let it stop his education. Through extraordinary hard work, he earned degrees from top universities around the world. He became the chief architect of the Indian Constitution and fought tirelessly for equality and the rights of the oppressed. His life is a powerful example of how education can break social barriers and change a nation.",
+    "successLesson": "Education is the most powerful tool to overcome inequality.",
+    "quote": "Be educated, be organised, and be agitated.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Dr._Bhimrao_Ambedkar.jpg/330px-Dr._Bhimrao_Ambedkar.jpg"
+  },
+  {
+    "name": "Mother Teresa",
+    "category": "Humanitarian",
+    "title": "A Life of Service and Compassion",
+    "summary": "Mother Teresa devoted her entire life to serving the poor, sick, and dying in the streets of Kolkata. She founded the Missionaries of Charity, which grew to help millions of people around the world. Despite having very little for herself, she gave everything to others with love and humility. She was awarded the Nobel Peace Prize for her selfless service. Her life teaches that true success lies in kindness and serving others.",
+    "successLesson": "The greatest success is the good you do for others.",
+    "quote": "Spread love everywhere you go. Let no one ever come to you without leaving happier.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Mother_Teresa_1.jpg/330px-Mother_Teresa_1.jpg"
+  }
+]

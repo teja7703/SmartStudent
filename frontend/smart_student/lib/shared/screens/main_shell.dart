@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
+import '../../features/progress/cubit/progress_cubit.dart';
 
 class MainShell extends StatefulWidget {
   final Widget child;
@@ -16,16 +18,47 @@ class _MainShellState extends State<MainShell> {
   int _currentIndex = 0;
 
   static const _tabs = [
-    _NavTab(label: 'Home', icon: Icons.home_rounded, path: '/home'),
-    _NavTab(label: 'Learn', icon: Icons.menu_book_rounded, path: '/study-materials'),
-    _NavTab(label: 'Quiz', icon: Icons.quiz_rounded, path: '/quizzes'),
-    _NavTab(label: 'Profile', icon: Icons.person_rounded, path: '/profile'),
+    _NavTab(
+      label: 'Home',
+      icon: Icons.home_outlined,
+      activeIcon: Icons.home_rounded,
+      path: '/home',
+    ),
+    _NavTab(
+      label: 'Materials',
+      icon: Icons.menu_book_outlined,
+      activeIcon: Icons.menu_book_rounded,
+      path: '/study-materials',
+    ),
+    _NavTab(
+      label: 'Quiz',
+      icon: Icons.quiz_outlined,
+      activeIcon: Icons.quiz_rounded,
+      path: '/quizzes',
+    ),
+    _NavTab(
+      label: 'Careers',
+      icon: Icons.work_outline_rounded,
+      activeIcon: Icons.work_rounded,
+      path: '/careers',
+    ),
+    _NavTab(
+      label: 'Profile',
+      icon: Icons.person_outline_rounded,
+      activeIcon: Icons.person_rounded,
+      path: '/profile',
+    ),
   ];
 
   void _onTabTapped(int index) {
     if (_currentIndex == index) return;
     setState(() => _currentIndex = index);
-    context.go(_tabs[index].path);
+    final path = _tabs[index].path;
+    context.go(path);
+    // Keep progress fresh when landing on the dashboards.
+    if (path == '/home' || path == '/profile') {
+      context.read<ProgressCubit>().load();
+    }
   }
 
   @override
@@ -40,21 +73,23 @@ class _MainShellState extends State<MainShell> {
       body: widget.child,
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
+          color: AppColors.surfaceLight,
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.08),
-              blurRadius: 12,
+              blurRadius: 16,
               offset: const Offset(0, -2),
             ),
           ],
         ),
-        child: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          onTap: _onTabTapped,
-          items: _tabs
+        child: NavigationBar(
+          selectedIndex: _currentIndex,
+          onDestinationSelected: _onTabTapped,
+          destinations: _tabs
               .map(
-                (tab) => BottomNavigationBarItem(
+                (tab) => NavigationDestination(
                   icon: Icon(tab.icon),
+                  selectedIcon: Icon(tab.activeIcon),
                   label: tab.label,
                 ),
               )
@@ -68,11 +103,13 @@ class _MainShellState extends State<MainShell> {
 class _NavTab {
   final String label;
   final IconData icon;
+  final IconData activeIcon;
   final String path;
 
   const _NavTab({
     required this.label,
     required this.icon,
+    required this.activeIcon,
     required this.path,
   });
 }

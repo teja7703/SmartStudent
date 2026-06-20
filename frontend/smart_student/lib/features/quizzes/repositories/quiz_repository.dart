@@ -1,35 +1,94 @@
 import '../../../core/network/api_client.dart';
+import '../../../core/services/storage_service.dart';
+import '../models/question_model.dart';
 import '../models/quiz_model.dart';
+import '../models/quiz_result_model.dart';
 
 class QuizRepository {
   final ApiClient _apiClient;
+  final StorageService _storageService;
 
-  QuizRepository({required ApiClient apiClient}) : _apiClient = apiClient;
+  QuizRepository({
+    required ApiClient apiClient,
+    required StorageService storageService,
+  })  : _apiClient = apiClient,
+        _storageService = storageService;
 
-  Future<List<QuizModel>> getQuizzes({
+  /// Fetches raw questions (the question bank) from the backend.
+  Future<List<QuestionModel>> getQuestions({
     String? classLevel,
     String? category,
     String? difficulty,
     int page = 1,
-    int limit = 20,
+    int limit = 500,
   }) async {
     final response = await _apiClient.get(
       '/api/quizzes',
       queryParameters: {
-        if (classLevel != null && classLevel.isNotEmpty) 'classLevel': classLevel,
+        if (classLevel != null && classLevel.isNotEmpty)
+          'classLevel': classLevel,
         if (category != null && category.isNotEmpty) 'category': category,
-        if (difficulty != null && difficulty.isNotEmpty) 'difficulty': difficulty,
+        if (difficulty != null && difficulty.isNotEmpty)
+          'difficulty': difficulty,
         'page': page,
         'limit': limit,
       },
     );
 
     final List data = response.data['data'] ?? [];
-    return data.map((e) => QuizModel.fromJson(e)).toList();
+    return data.map((e) => QuestionModel.fromJson(e)).toList();
   }
 
-  Future<QuizModel> getQuizById(String id) async {
-    final response = await _apiClient.get('/api/quizzes/$id');
-    return QuizModel.fromJson(response.data['data']);
+  /// Builds the full quiz catalog dynamically: a list of quizzes per class
+  /// level, where each quiz groups the questions of one subject.
+  Future<Map<String, List<QuizModel>>> getCatalog() async {
+    final questions = await getQuestions(limit: 1000);
+    return _groupIntoCatalog(questions);
+  }
+
+  Map<String, List<QuizModel>> _groupIntoCatalog(
+    List<QuestionModel> questions,
+  ) {
+    final byClass = <String, Map<String, List<QuestionModel>>>{};
+
+    for (final q in questions) {
+      final classKey = q.classLevel.isEmpty ? 'General' : q.classLevel;
+      final subjectKey = q.category.isEmpty ? 'General' : q.category;
+      byClass
+          .putIfAbsent(classKey, () => {})
+          .putIfAbsent(subjectKey, () => [])
+          .add(q);
+    }
+
+    final catalog = <String, List<QuizModel>>{};
+    for (final classEntry in byClass.entries) {
+      final quizzes = classEntry.value.entries
+          .map(
+            (subjectEntry) => QuizModel(
+              id: '${classEntry.key}-${subjectEntry.key}',
+              title: '${subjectEntry.key} Quiz',
+              subject: subjectEntry.key,
+              classLevel: classEntry.key,
+              questions: subjectEntry.value,
+            ),
+          )
+          .toList()
+        ..sort((a, b) => a.subject.compareTo(b.subject));
+      catalog[classEntry.key] = quizzes;
+    }
+    return catalog;
+  }
+
+  Future<List<QuizResultModel>> getHistory() async {
+    final raw = await _storageService.getQuizHistory();
+    return raw.map((e) => QuizResultModel.fromJson(e)).toList();
+  }
+
+  Future<void> saveResult(QuizResultModel result) async {
+    await _storageService.addQuizResult(result.toJson());
+  }
+
+  Future<void> clearHistory() async {
+    await _storageService.clearQuizHistory();
   }
 }

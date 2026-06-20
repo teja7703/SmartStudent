@@ -6,7 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.js",
+    "seed:materials": "node scripts/seedStudyMaterials.js",
+    "seed:quizzes": "node scripts/seedQuizzes.js",
+    "seed:careers": "node scripts/seedCareers.js",
+    "seed:stories": "node scripts/seedStories.js"
   },
   "keywords": [],
   "author": "",

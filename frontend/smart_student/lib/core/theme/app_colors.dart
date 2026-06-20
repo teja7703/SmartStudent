@@ -23,4 +23,62 @@ class AppColors {
   static const Color divider = Color(0xFFE5E7EB);
   static const Color shimmerBase = Color(0xFFE0E0E0);
   static const Color shimmerHighlight = Color(0xFFF5F5F5);
+
+  // ---- Soft tints (for card backgrounds / chips) ------------------------
+  static const Color blueTint = Color(0xFFEAF1FB);
+  static const Color greenTint = Color(0xFFE7F9EF);
+  static const Color orangeTint = Color(0xFFFFF3E6);
+  static const Color purpleTint = Color(0xFFEFEDFC);
+  static const Color redTint = Color(0xFFFFECEC);
+
+  // ---- Brand gradients --------------------------------------------------
+  static const LinearGradient blueGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [Color(0xFF2E6FD6), Color(0xFF1E56A0)],
+  );
+
+  static const LinearGradient purpleGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [Color(0xFF8B7BF0), Color(0xFF6C5CE7)],
+  );
+
+  static const LinearGradient greenGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [Color(0xFF36D77F), Color(0xFF1E8449)],
+  );
+
+  static const LinearGradient orangeGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [Color(0xFFFFB35C), Color(0xFFFF8C2B)],
+  );
+
+  static const LinearGradient sunsetGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [Color(0xFFFF8C7A), Color(0xFFFF6B6B)],
+  );
+
+  static const LinearGradient heroGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [Color(0xFF6C5CE7), Color(0xFF2E6FD6)],
+  );
+
+  /// Returns a 2-stop gradient derived from a single brand [color].
+  static LinearGradient gradientFor(Color color) {
+    return LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [
+        Color.lerp(color, Colors.white, 0.18)!,
+        color,
+      ],
+    );
+  }
+
+  static Color tintFor(Color color) => color.withValues(alpha: 0.12);
 }

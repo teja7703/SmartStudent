@@ -59,4 +59,63 @@ class StorageService {
     final key = '${AppConstants.readProgressKey}_$storyId';
     return p.getDouble(key) ?? 0.0;
   }
+
+  Future<List<Map<String, dynamic>>> getQuizHistory() async {
+    final p = await prefs;
+    final raw = p.getStringList(AppConstants.quizHistoryKey) ?? [];
+    return raw
+        .map((e) => jsonDecode(e) as Map<String, dynamic>)
+        .toList();
+  }
+
+  Future<void> addQuizResult(Map<String, dynamic> result) async {
+    final p = await prefs;
+    final raw = p.getStringList(AppConstants.quizHistoryKey) ?? [];
+    raw.insert(0, jsonEncode(result));
+    // Keep only the latest 50 attempts.
+    final trimmed = raw.take(50).toList();
+    await p.setStringList(AppConstants.quizHistoryKey, trimmed);
+  }
+
+  Future<void> clearQuizHistory() async {
+    final p = await prefs;
+    await p.remove(AppConstants.quizHistoryKey);
+  }
+
+  /// Records a visited item (study material, story, etc.) for the
+  /// "Your Progress" / recent activity section. Newest first, de-duplicated
+  /// by type+id, capped at 30 entries.
+  Future<void> recordActivity({
+    required String type,
+    required String id,
+    required String title,
+    String subtitle = '',
+  }) async {
+    final p = await prefs;
+    final raw = p.getStringList(AppConstants.activityKey) ?? [];
+    final list = raw
+        .map((e) => jsonDecode(e) as Map<String, dynamic>)
+        .where((e) => !(e['type'] == type && e['id'] == id))
+        .toList();
+    list.insert(0, {
+      'type': type,
+      'id': id,
+      'title': title,
+      'subtitle': subtitle,
+      'ts': DateTime.now().toIso8601String(),
+    });
+    final trimmed = list.take(30).map(jsonEncode).toList();
+    await p.setStringList(AppConstants.activityKey, trimmed);
+  }
+
+  Future<List<Map<String, dynamic>>> getRecentActivity() async {
+    final p = await prefs;
+    final raw = p.getStringList(AppConstants.activityKey) ?? [];
+    return raw.map((e) => jsonDecode(e) as Map<String, dynamic>).toList();
+  }
+
+  Future<void> clearActivity() async {
+    final p = await prefs;
+    await p.remove(AppConstants.activityKey);
+  }
 }

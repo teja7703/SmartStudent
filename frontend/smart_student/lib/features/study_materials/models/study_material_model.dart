@@ -5,6 +5,9 @@ class StudyMaterialModel {
   final String content;
   final String pdfUrl;
   final String videoUrl;
+  final String academicLevel;
+  final String subject;
+  final String language;
 
   StudyMaterialModel({
     required this.id,
@@ -13,18 +16,24 @@ class StudyMaterialModel {
     required this.content,
     required this.pdfUrl,
     required this.videoUrl,
+    this.academicLevel = '',
+    this.subject = '',
+    this.language = 'English',
   });
 
-  factory StudyMaterialModel.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    return StudyMaterialModel(
-      id: json['_id'] ?? '',
-      title: json['title'] ?? '',
-      chapter: json['chapter'] ?? '',
-      content: json['content'] ?? '',
-      pdfUrl: json['pdfUrl'] ?? '',
-      videoUrl: json['videoUrl'] ?? '',
-    );
-  }
+factory StudyMaterialModel.fromJson(
+  Map<String, dynamic> json,
+) {
+  return StudyMaterialModel(
+    id: json['_id'] ?? '',
+    title: json['title'] ?? '',
+    chapter: json['chapter'] ?? '',
+    content: json['content'] ?? '',
+    pdfUrl: json['pdfUrl'] ?? '',
+    videoUrl: json['videoUrl'] ?? '',
+    academicLevel: json['academicLevel'] ?? '',
+    subject: json['subject'] ?? '',
+    language: json['language'] ?? 'English',
+  );
+}
 }

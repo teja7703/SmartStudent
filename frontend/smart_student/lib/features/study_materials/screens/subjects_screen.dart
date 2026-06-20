@@ -6,10 +6,12 @@ import '../../../core/widgets/stat_card.dart';
 
 class SubjectsScreen extends StatelessWidget {
   final String academicLevel;
+  final String language;
 
   const SubjectsScreen({
     super.key,
     required this.academicLevel,
+    required this.language,
   });
 
   static const _subjectIcons = {
@@ -34,7 +36,9 @@ class SubjectsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AcademicConstants.formatLevel(academicLevel)),
+        title: Text(
+          AcademicConstants.formatLevel(academicLevel, language),
+        ),
       ),
       body: ListView.separated(
         padding: const EdgeInsets.all(16),
@@ -43,12 +47,12 @@ class SubjectsScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           final subject = AcademicConstants.subjects[index];
           return LevelListTile(
-            title: subject,
-            subtitle: 'Browse study materials',
+            title: AcademicConstants.formatSubject(subject, language),
+            subtitle: AcademicConstants.browseMaterials(language),
             icon: _subjectIcons[subject] ?? Icons.book_rounded,
             iconColor: _subjectColors[subject] ?? AppColors.primaryBlue,
             onTap: () => context.push(
-              '/study-materials/$academicLevel/$subject',
+              '/study-materials/$language/$academicLevel/$subject',
             ),
           );
         },

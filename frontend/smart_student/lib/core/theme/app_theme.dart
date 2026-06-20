@@ -8,7 +8,8 @@ class AppTheme {
     final colorScheme = ColorScheme.fromSeed(
       seedColor: AppColors.primaryBlue,
       primary: AppColors.primaryBlue,
-      secondary: AppColors.secondaryGreen,
+      secondary: AppColors.accentPurple,
+      tertiary: AppColors.accentOrange,
       surface: AppColors.surfaceLight,
       brightness: Brightness.light,
     );
@@ -97,6 +98,37 @@ class AppTheme {
         elevation: 8,
         selectedLabelStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
         unselectedLabelStyle: TextStyle(fontSize: 12),
+      ),
+      navigationBarTheme: NavigationBarThemeData(
+        backgroundColor: AppColors.surfaceLight,
+        elevation: 0,
+        height: 68,
+        labelBehavior:
+            NavigationDestinationLabelBehavior.onlyShowSelected,
+        indicatorColor: AppColors.primaryBlue.withValues(alpha: 0.12),
+        iconTheme: WidgetStateProperty.resolveWith((states) {
+          final selected = states.contains(WidgetState.selected);
+          return IconThemeData(
+            color: selected ? AppColors.primaryBlue : AppColors.textHint,
+            size: 24,
+          );
+        }),
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          final selected = states.contains(WidgetState.selected);
+          return TextStyle(
+            fontSize: 12,
+            fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+            color: selected ? AppColors.primaryBlue : AppColors.textHint,
+          );
+        }),
+      ),
+      snackBarTheme: SnackBarThemeData(
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: AppColors.textPrimary,
+        contentTextStyle: const TextStyle(color: Colors.white, fontSize: 14),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
       ),
       dividerTheme: const DividerThemeData(
         color: AppColors.divider,

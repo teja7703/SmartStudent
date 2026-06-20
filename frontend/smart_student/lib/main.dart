@@ -5,6 +5,7 @@ import 'package:smart_student/core/theme/app_theme.dart';
 import 'package:smart_student/features/auth/cubit/auth_cubit.dart';
 import 'package:smart_student/features/careers/cubit/career_cubit.dart';
 import 'package:smart_student/features/home/cubit/dashboard_cubit.dart';
+import 'package:smart_student/features/progress/cubit/progress_cubit.dart';
 import 'package:smart_student/features/quizzes/cubit/quiz_cubit.dart';
 import 'package:smart_student/features/stories/cubit/story_cubit.dart';
 import 'package:smart_student/firebase_options.dart';
@@ -21,6 +22,7 @@ void main() async {
   await setupDependencies();
 
   final authCubit = getIt<AuthCubit>()..checkAuthStatus();
+  getIt<ProgressCubit>().load();
 
   runApp(SmartStudentApp(authCubit: authCubit));
 }
@@ -35,6 +37,7 @@ class SmartStudentApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(value: authCubit),
+        BlocProvider.value(value: getIt<ProgressCubit>()),
         BlocProvider(create: (_) => getIt<DashboardCubit>()),
         BlocProvider(create: (_) => getIt<CareerCubit>()),
         BlocProvider(create: (_) => getIt<StoryCubit>()),

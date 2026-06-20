@@ -9,7 +9,10 @@ import 'features/home/cubit/dashboard_cubit.dart';
 import 'features/home/repositories/dashboard_repository.dart';
 import 'features/previous_papers/cubit/previous_paper_cubit.dart';
 import 'features/previous_papers/repositories/previous_paper_repository.dart';
+import 'features/progress/cubit/progress_cubit.dart';
 import 'features/quizzes/cubit/quiz_cubit.dart';
+import 'features/quizzes/cubit/quiz_play_cubit.dart';
+import 'features/quizzes/models/quiz_model.dart';
 import 'features/quizzes/repositories/quiz_repository.dart';
 import 'features/stories/cubit/story_cubit.dart';
 import 'features/stories/repositories/story_repository.dart';
@@ -44,7 +47,10 @@ Future<void> setupDependencies() async {
     () => StoryRepository(apiClient: getIt<ApiClient>()),
   );
   getIt.registerLazySingleton<QuizRepository>(
-    () => QuizRepository(apiClient: getIt<ApiClient>()),
+    () => QuizRepository(
+      apiClient: getIt<ApiClient>(),
+      storageService: getIt<StorageService>(),
+    ),
   );
 
   getIt.registerFactory<AuthCubit>(
@@ -62,16 +68,36 @@ Future<void> setupDependencies() async {
   getIt.registerFactory<QuizCubit>(
     () => QuizCubit(getIt<QuizRepository>()),
   );
+  getIt.registerLazySingleton<ProgressCubit>(
+    () => ProgressCubit(getIt<StorageService>()),
+  );
 }
 
 StudyMaterialCubit createStudyMaterialCubit({
   required String academicLevel,
   required String subject,
+  String language = 'English',
 }) {
   return StudyMaterialCubit(
     repository: getIt<StudyMaterialRepository>(),
     academicLevel: academicLevel,
     subject: subject,
+    language: language,
+  );
+}
+
+CareerCubit createCareerCubit() {
+  return CareerCubit(getIt<CareerRepository>());
+}
+
+StoryCubit createStoryCubit() {
+  return StoryCubit(getIt<StoryRepository>(), getIt<StorageService>());
+}
+
+QuizPlayCubit createQuizPlayCubit(QuizModel quiz) {
+  return QuizPlayCubit(
+    quiz: quiz,
+    repository: getIt<QuizRepository>(),
   );
 }
 

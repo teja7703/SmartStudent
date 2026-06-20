@@ -1,0 +1,942 @@
+[
+  {
+    "question": "What is the HCF of 12 and 18?",
+    "options": ["2", "6", "9", "12"],
+    "correctAnswer": "6",
+    "explanation": "HCF of 12 and 18 is 6 since 6 is the largest number dividing both.",
+    "category": "Maths",
+    "classLevel": "10",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Which of the following is an irrational number?",
+    "options": ["1/2", "0.25", "√2", "3"],
+    "correctAnswer": "√2",
+    "explanation": "√2 cannot be written as p/q, so it is irrational.",
+    "category": "Maths",
+    "classLevel": "10",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The degree of the polynomial x² + 5x + 6 is:",
+    "options": ["1", "2", "3", "0"],
+    "correctAnswer": "2",
+    "explanation": "The highest power of x is 2, so the degree is 2.",
+    "category": "Maths",
+    "classLevel": "10",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The sum of the zeroes of x² - 5x + 6 is:",
+    "options": ["5", "6", "-5", "1"],
+    "correctAnswer": "5",
+    "explanation": "Sum of zeroes = -b/a = -(-5)/1 = 5.",
+    "category": "Maths",
+    "classLevel": "10",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "The discriminant of ax² + bx + c = 0 is:",
+    "options": ["b² - 4ac", "2a", "-b/a", "b² + 4ac"],
+    "correctAnswer": "b² - 4ac",
+    "explanation": "Discriminant D = b² - 4ac determines the nature of roots.",
+    "category": "Maths",
+    "classLevel": "10",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "If sin θ = 3/5, then cos θ is:",
+    "options": ["4/5", "5/4", "3/4", "5/3"],
+    "correctAnswer": "4/5",
+    "explanation": "Using sin²θ + cos²θ = 1, cos θ = 4/5.",
+    "category": "Maths",
+    "classLevel": "10",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "The distance between points (0,0) and (3,4) is:",
+    "options": ["5", "7", "1", "25"],
+    "correctAnswer": "5",
+    "explanation": "Distance = √(3² + 4²) = √25 = 5.",
+    "category": "Maths",
+    "classLevel": "10",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The value of tan 45° is:",
+    "options": ["0", "1", "√3", "1/√3"],
+    "correctAnswer": "1",
+    "explanation": "tan 45° = 1.",
+    "category": "Maths",
+    "classLevel": "10",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Area of a circle with radius 7 cm (π = 22/7) is:",
+    "options": ["154 cm²", "44 cm²", "49 cm²", "22 cm²"],
+    "correctAnswer": "154 cm²",
+    "explanation": "Area = πr² = 22/7 × 7 × 7 = 154 cm².",
+    "category": "Maths",
+    "classLevel": "10",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "The probability of a sure event is:",
+    "options": ["0", "1", "0.5", "-1"],
+    "correctAnswer": "1",
+    "explanation": "A sure event always happens, so its probability is 1.",
+    "category": "Maths",
+    "classLevel": "10",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The chemical symbol for Gold is:",
+    "options": ["Go", "Gd", "Au", "Ag"],
+    "correctAnswer": "Au",
+    "explanation": "Gold's symbol Au comes from the Latin 'Aurum'.",
+    "category": "Science",
+    "classLevel": "10",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Which gas do plants absorb during photosynthesis?",
+    "options": ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"],
+    "correctAnswer": "Carbon dioxide",
+    "explanation": "Plants take in CO₂ and release O₂ during photosynthesis.",
+    "category": "Science",
+    "classLevel": "10",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The SI unit of electric current is:",
+    "options": ["Volt", "Watt", "Ampere", "Ohm"],
+    "correctAnswer": "Ampere",
+    "explanation": "Electric current is measured in Amperes (A).",
+    "category": "Science",
+    "classLevel": "10",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Ohm's law is expressed as:",
+    "options": ["V = IR", "V = I/R", "I = VR", "R = VI"],
+    "correctAnswer": "V = IR",
+    "explanation": "Ohm's law states V = IR.",
+    "category": "Science",
+    "classLevel": "10",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "The powerhouse of the cell is:",
+    "options": ["Nucleus", "Ribosome", "Mitochondria", "Chloroplast"],
+    "correctAnswer": "Mitochondria",
+    "explanation": "Mitochondria produce energy (ATP) for the cell.",
+    "category": "Science",
+    "classLevel": "10",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Which of these is a good conductor of electricity?",
+    "options": ["Rubber", "Copper", "Glass", "Plastic"],
+    "correctAnswer": "Copper",
+    "explanation": "Copper is a metal and a good conductor of electricity.",
+    "category": "Science",
+    "classLevel": "10",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The pH value of a neutral solution is:",
+    "options": ["0", "7", "14", "1"],
+    "correctAnswer": "7",
+    "explanation": "A neutral solution like pure water has a pH of 7.",
+    "category": "Science",
+    "classLevel": "10",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "Choose the correct synonym of 'Happy':",
+    "options": ["Sad", "Joyful", "Angry", "Tired"],
+    "correctAnswer": "Joyful",
+    "explanation": "'Joyful' means the same as 'Happy'.",
+    "category": "English",
+    "classLevel": "10",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Identify the verb in: 'She sings beautifully.'",
+    "options": ["She", "sings", "beautifully", "none"],
+    "correctAnswer": "sings",
+    "explanation": "'Sings' is the action word (verb).",
+    "category": "English",
+    "classLevel": "10",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The antonym of 'Ancient' is:",
+    "options": ["Old", "Modern", "Historic", "Antique"],
+    "correctAnswer": "Modern",
+    "explanation": "'Modern' is the opposite of 'Ancient'.",
+    "category": "English",
+    "classLevel": "10",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Choose the correctly spelled word:",
+    "options": ["Recieve", "Receive", "Receeve", "Receve"],
+    "correctAnswer": "Receive",
+    "explanation": "The rule 'i before e except after c' gives 'Receive'.",
+    "category": "English",
+    "classLevel": "10",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "Which is a preposition in: 'The book is on the table.'?",
+    "options": ["book", "is", "on", "table"],
+    "correctAnswer": "on",
+    "explanation": "'On' shows the position, so it is a preposition.",
+    "category": "English",
+    "classLevel": "10",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Who was the first President of India?",
+    "options": ["Jawaharlal Nehru", "Rajendra Prasad", "Sardar Patel", "B. R. Ambedkar"],
+    "correctAnswer": "Rajendra Prasad",
+    "explanation": "Dr. Rajendra Prasad was India's first President.",
+    "category": "Social",
+    "classLevel": "10",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The Indian National Congress was founded in:",
+    "options": ["1885", "1905", "1920", "1947"],
+    "correctAnswer": "1885",
+    "explanation": "The INC was founded in 1885 by A. O. Hume.",
+    "category": "Social",
+    "classLevel": "10",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "Which river is known as the 'Ganga of the South'?",
+    "options": ["Krishna", "Godavari", "Kaveri", "Tungabhadra"],
+    "correctAnswer": "Godavari",
+    "explanation": "The Godavari is called the Ganga of the South.",
+    "category": "Social",
+    "classLevel": "10",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "The capital of Andhra Pradesh is:",
+    "options": ["Hyderabad", "Amaravati", "Vijayawada", "Visakhapatnam"],
+    "correctAnswer": "Amaravati",
+    "explanation": "Amaravati is the capital of Andhra Pradesh.",
+    "category": "Social",
+    "classLevel": "10",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Who wrote the Indian National Anthem?",
+    "options": ["Bankim Chandra", "Rabindranath Tagore", "Sarojini Naidu", "Mahatma Gandhi"],
+    "correctAnswer": "Rabindranath Tagore",
+    "explanation": "Rabindranath Tagore wrote 'Jana Gana Mana'.",
+    "category": "Social",
+    "classLevel": "10",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "What is the value of 15 × 8?",
+    "options": ["110", "120", "130", "115"],
+    "correctAnswer": "120",
+    "explanation": "15 × 8 = 120.",
+    "category": "Maths",
+    "classLevel": "9",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The area of a triangle with base 10 and height 6 is:",
+    "options": ["60", "30", "16", "32"],
+    "correctAnswer": "30",
+    "explanation": "Area = 1/2 × base × height = 1/2 × 10 × 6 = 30.",
+    "category": "Maths",
+    "classLevel": "9",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The square root of 144 is:",
+    "options": ["11", "12", "13", "14"],
+    "correctAnswer": "12",
+    "explanation": "12 × 12 = 144.",
+    "category": "Maths",
+    "classLevel": "9",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Which number is a prime number?",
+    "options": ["9", "15", "17", "21"],
+    "correctAnswer": "17",
+    "explanation": "17 has only two factors: 1 and 17.",
+    "category": "Maths",
+    "classLevel": "9",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Water boils at what temperature at sea level?",
+    "options": ["50°C", "90°C", "100°C", "120°C"],
+    "correctAnswer": "100°C",
+    "explanation": "Water boils at 100°C at standard atmospheric pressure.",
+    "category": "Science",
+    "classLevel": "9",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The largest planet in the solar system is:",
+    "options": ["Earth", "Mars", "Jupiter", "Saturn"],
+    "correctAnswer": "Jupiter",
+    "explanation": "Jupiter is the largest planet.",
+    "category": "Science",
+    "classLevel": "9",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Which is the smallest unit of life?",
+    "options": ["Tissue", "Organ", "Cell", "Organism"],
+    "correctAnswer": "Cell",
+    "explanation": "The cell is the basic structural unit of life.",
+    "category": "Science",
+    "classLevel": "9",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The plural of 'child' is:",
+    "options": ["childs", "childes", "children", "childern"],
+    "correctAnswer": "children",
+    "explanation": "'Children' is the irregular plural of 'child'.",
+    "category": "English",
+    "classLevel": "9",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Choose the article: '__ apple a day keeps the doctor away.'",
+    "options": ["A", "An", "The", "No article"],
+    "correctAnswer": "An",
+    "explanation": "'An' is used before vowel sounds like 'apple'.",
+    "category": "English",
+    "classLevel": "9",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "In which year did India gain independence?",
+    "options": ["1942", "1945", "1947", "1950"],
+    "correctAnswer": "1947",
+    "explanation": "India became independent on 15 August 1947.",
+    "category": "Social",
+    "classLevel": "9",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The longest river in the world is:",
+    "options": ["Amazon", "Nile", "Ganga", "Yangtze"],
+    "correctAnswer": "Nile",
+    "explanation": "The Nile is generally regarded as the longest river.",
+    "category": "Social",
+    "classLevel": "9",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "What is 7 × 6?",
+    "options": ["42", "36", "48", "40"],
+    "correctAnswer": "42",
+    "explanation": "7 × 6 = 42.",
+    "category": "Maths",
+    "classLevel": "8",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The perimeter of a square with side 5 cm is:",
+    "options": ["10 cm", "15 cm", "20 cm", "25 cm"],
+    "correctAnswer": "20 cm",
+    "explanation": "Perimeter = 4 × side = 4 × 5 = 20 cm.",
+    "category": "Maths",
+    "classLevel": "8",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Which is a renewable source of energy?",
+    "options": ["Coal", "Petrol", "Solar", "Diesel"],
+    "correctAnswer": "Solar",
+    "explanation": "Solar energy is renewable.",
+    "category": "Science",
+    "classLevel": "8",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "How many bones are there in the adult human body?",
+    "options": ["206", "201", "210", "215"],
+    "correctAnswer": "206",
+    "explanation": "An adult human has 206 bones.",
+    "category": "Science",
+    "classLevel": "8",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "Choose the correct past tense of 'go':",
+    "options": ["goed", "gone", "went", "going"],
+    "correctAnswer": "went",
+    "explanation": "The simple past of 'go' is 'went'.",
+    "category": "English",
+    "classLevel": "8",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Which is a noun in: 'The dog runs fast.'?",
+    "options": ["runs", "fast", "dog", "the"],
+    "correctAnswer": "dog",
+    "explanation": "'Dog' is a naming word (noun).",
+    "category": "English",
+    "classLevel": "8",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Who is known as the Father of the Nation in India?",
+    "options": ["Nehru", "Mahatma Gandhi", "Patel", "Bose"],
+    "correctAnswer": "Mahatma Gandhi",
+    "explanation": "Mahatma Gandhi is called the Father of the Nation.",
+    "category": "Social",
+    "classLevel": "8",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "How many continents are there on Earth?",
+    "options": ["5", "6", "7", "8"],
+    "correctAnswer": "7",
+    "explanation": "There are 7 continents.",
+    "category": "Social",
+    "classLevel": "8",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The value of 25% of 200 is:",
+    "options": ["25", "40", "50", "75"],
+    "correctAnswer": "50",
+    "explanation": "25% of 200 = 25/100 × 200 = 50.",
+    "category": "Maths",
+    "classLevel": "8",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The cube of 3 is:",
+    "options": ["6", "9", "27", "81"],
+    "correctAnswer": "27",
+    "explanation": "3³ = 3 × 3 × 3 = 27.",
+    "category": "Maths",
+    "classLevel": "8",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Which device converts electrical energy into light?",
+    "options": ["Motor", "Bulb", "Battery", "Fan"],
+    "correctAnswer": "Bulb",
+    "explanation": "A bulb converts electrical energy into light energy.",
+    "category": "Science",
+    "classLevel": "8",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The process by which plants make food is called:",
+    "options": ["Respiration", "Photosynthesis", "Digestion", "Excretion"],
+    "correctAnswer": "Photosynthesis",
+    "explanation": "Plants make food through photosynthesis using sunlight.",
+    "category": "Science",
+    "classLevel": "8",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Choose the correct sentence:",
+    "options": ["He don't like tea.", "He doesn't likes tea.", "He doesn't like tea.", "He not like tea."],
+    "correctAnswer": "He doesn't like tea.",
+    "explanation": "With 'he', use 'doesn't' + base verb 'like'.",
+    "category": "English",
+    "classLevel": "8",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "The Quit India Movement started in the year:",
+    "options": ["1930", "1942", "1945", "1947"],
+    "correctAnswer": "1942",
+    "explanation": "The Quit India Movement began in 1942.",
+    "category": "Social",
+    "classLevel": "8",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "Simplify: 3x + 2x =",
+    "options": ["5x", "6x", "x", "5"],
+    "correctAnswer": "5x",
+    "explanation": "3x + 2x = 5x (add like terms).",
+    "category": "Maths",
+    "classLevel": "9",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The sum of angles in a triangle is:",
+    "options": ["90°", "180°", "270°", "360°"],
+    "correctAnswer": "180°",
+    "explanation": "The angles of a triangle always add up to 180°.",
+    "category": "Maths",
+    "classLevel": "9",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Which law states 'every action has an equal and opposite reaction'?",
+    "options": ["Newton's First Law", "Newton's Second Law", "Newton's Third Law", "Ohm's Law"],
+    "correctAnswer": "Newton's Third Law",
+    "explanation": "Newton's Third Law describes action-reaction pairs.",
+    "category": "Science",
+    "classLevel": "9",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "The chemical formula of water is:",
+    "options": ["CO2", "H2O", "O2", "NaCl"],
+    "correctAnswer": "H2O",
+    "explanation": "Water is made of two hydrogen atoms and one oxygen atom.",
+    "category": "Science",
+    "classLevel": "9",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Choose the correct comparative form of 'good':",
+    "options": ["gooder", "more good", "better", "best"],
+    "correctAnswer": "better",
+    "explanation": "The comparative of 'good' is 'better'.",
+    "category": "English",
+    "classLevel": "9",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Identify the adjective: 'It was a beautiful day.'",
+    "options": ["It", "was", "beautiful", "day"],
+    "correctAnswer": "beautiful",
+    "explanation": "'Beautiful' describes the noun 'day', so it is an adjective.",
+    "category": "English",
+    "classLevel": "9",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The first Battle of Panipat was fought in:",
+    "options": ["1526", "1556", "1761", "1857"],
+    "correctAnswer": "1526",
+    "explanation": "Babur defeated Ibrahim Lodi in the first Battle of Panipat (1526).",
+    "category": "Social",
+    "classLevel": "9",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "Which is the largest democracy in the world?",
+    "options": ["USA", "China", "India", "Russia"],
+    "correctAnswer": "India",
+    "explanation": "India is the world's largest democracy by population.",
+    "category": "Social",
+    "classLevel": "9",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "If 2x = 10, then x is:",
+    "options": ["2", "5", "8", "20"],
+    "correctAnswer": "5",
+    "explanation": "x = 10 / 2 = 5.",
+    "category": "Maths",
+    "classLevel": "10",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The 5th term of the AP 2, 5, 8, ... is:",
+    "options": ["11", "14", "15", "17"],
+    "correctAnswer": "14",
+    "explanation": "aₙ = a + (n-1)d = 2 + 4×3 = 14.",
+    "category": "Maths",
+    "classLevel": "10",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "Reflection of light from a smooth surface is called:",
+    "options": ["Refraction", "Regular reflection", "Diffraction", "Dispersion"],
+    "correctAnswer": "Regular reflection",
+    "explanation": "Smooth surfaces produce regular (specular) reflection.",
+    "category": "Science",
+    "classLevel": "10",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "The acid present in the stomach is:",
+    "options": ["Sulphuric acid", "Hydrochloric acid", "Nitric acid", "Acetic acid"],
+    "correctAnswer": "Hydrochloric acid",
+    "explanation": "The stomach uses hydrochloric acid (HCl) for digestion.",
+    "category": "Science",
+    "classLevel": "10",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "Choose the correct passive form: 'She writes a letter.'",
+    "options": ["A letter is written by her.", "A letter was written by her.", "A letter writes by her.", "A letter is wrote by her."],
+    "correctAnswer": "A letter is written by her.",
+    "explanation": "Present simple passive: is/are + past participle.",
+    "category": "English",
+    "classLevel": "10",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "Who was the leader of the Salt March (Dandi March)?",
+    "options": ["Nehru", "Mahatma Gandhi", "Bose", "Patel"],
+    "correctAnswer": "Mahatma Gandhi",
+    "explanation": "Gandhi led the Dandi Salt March in 1930.",
+    "category": "Social",
+    "classLevel": "10",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The derivative of x² with respect to x is:",
+    "options": ["x", "2x", "x²", "2"],
+    "correctAnswer": "2x",
+    "explanation": "d/dx(xⁿ) = n·xⁿ⁻¹, so d/dx(x²) = 2x.",
+    "category": "Mathematics",
+    "classLevel": "Inter 1st Year",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "The value of sin 30° is:",
+    "options": ["1/2", "√3/2", "1", "0"],
+    "correctAnswer": "1/2",
+    "explanation": "sin 30° = 1/2.",
+    "category": "Mathematics",
+    "classLevel": "Inter 1st Year",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The number of permutations of 3 distinct objects is:",
+    "options": ["3", "6", "9", "12"],
+    "correctAnswer": "6",
+    "explanation": "3! = 3 × 2 × 1 = 6.",
+    "category": "Mathematics",
+    "classLevel": "Inter 1st Year",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "The SI unit of force is:",
+    "options": ["Joule", "Newton", "Watt", "Pascal"],
+    "correctAnswer": "Newton",
+    "explanation": "Force is measured in newtons (N).",
+    "category": "Physics",
+    "classLevel": "Inter 1st Year",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The acceleration due to gravity on Earth is approximately:",
+    "options": ["9.8 m/s²", "8.9 m/s²", "10.8 m/s²", "6.7 m/s²"],
+    "correctAnswer": "9.8 m/s²",
+    "explanation": "g ≈ 9.8 m/s² near the Earth's surface.",
+    "category": "Physics",
+    "classLevel": "Inter 1st Year",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Which quantity is a vector?",
+    "options": ["Speed", "Distance", "Velocity", "Mass"],
+    "correctAnswer": "Velocity",
+    "explanation": "Velocity has both magnitude and direction, so it is a vector.",
+    "category": "Physics",
+    "classLevel": "Inter 1st Year",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "The atomic number of an element represents the number of:",
+    "options": ["Neutrons", "Protons", "Electrons + Neutrons", "Nucleons"],
+    "correctAnswer": "Protons",
+    "explanation": "Atomic number = number of protons in the nucleus.",
+    "category": "Chemistry",
+    "classLevel": "Inter 1st Year",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The pH of pure water at 25°C is:",
+    "options": ["0", "7", "10", "14"],
+    "correctAnswer": "7",
+    "explanation": "Pure water is neutral with pH 7.",
+    "category": "Chemistry",
+    "classLevel": "Inter 1st Year",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Which gas is known as laughing gas?",
+    "options": ["NO2", "N2O", "CO2", "SO2"],
+    "correctAnswer": "N2O",
+    "explanation": "Nitrous oxide (N₂O) is called laughing gas.",
+    "category": "Chemistry",
+    "classLevel": "Inter 1st Year",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "The basic unit of classification in living organisms is:",
+    "options": ["Genus", "Species", "Family", "Order"],
+    "correctAnswer": "Species",
+    "explanation": "Species is the basic unit of biological classification.",
+    "category": "Botany",
+    "classLevel": "Inter 1st Year",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Photosynthesis mainly takes place in the:",
+    "options": ["Root", "Stem", "Leaf", "Flower"],
+    "correctAnswer": "Leaf",
+    "explanation": "Leaves contain chloroplasts where photosynthesis occurs.",
+    "category": "Botany",
+    "classLevel": "Inter 1st Year",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The largest gland in the human body is:",
+    "options": ["Pancreas", "Liver", "Thyroid", "Salivary gland"],
+    "correctAnswer": "Liver",
+    "explanation": "The liver is the largest gland in the human body.",
+    "category": "Zoology",
+    "classLevel": "Inter 1st Year",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Red blood cells are produced in the:",
+    "options": ["Heart", "Liver", "Bone marrow", "Kidney"],
+    "correctAnswer": "Bone marrow",
+    "explanation": "RBCs are produced in the red bone marrow.",
+    "category": "Zoology",
+    "classLevel": "Inter 1st Year",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "Choose the correct meaning of the idiom 'break the ice':",
+    "options": ["To freeze", "To start a conversation", "To get angry", "To fail"],
+    "correctAnswer": "To start a conversation",
+    "explanation": "'Break the ice' means to initiate conversation in a social setting.",
+    "category": "English",
+    "classLevel": "Inter 1st Year",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "The integral of 1/x dx is:",
+    "options": ["ln|x| + C", "x + C", "1/x² + C", "-1/x² + C"],
+    "correctAnswer": "ln|x| + C",
+    "explanation": "∫(1/x) dx = ln|x| + C.",
+    "category": "Mathematics",
+    "classLevel": "Inter 2nd Year",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "The value of ∫ from 0 to 1 of 2x dx is:",
+    "options": ["0", "1", "2", "1/2"],
+    "correctAnswer": "1",
+    "explanation": "∫2x dx = x²; evaluated 0→1 gives 1 - 0 = 1.",
+    "category": "Mathematics",
+    "classLevel": "Inter 2nd Year",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "If the roots of ax²+bx+c=0 are equal, then:",
+    "options": ["b²-4ac > 0", "b²-4ac < 0", "b²-4ac = 0", "a = 0"],
+    "correctAnswer": "b²-4ac = 0",
+    "explanation": "Equal roots occur when the discriminant is zero.",
+    "category": "Mathematics",
+    "classLevel": "Inter 2nd Year",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "The unit of electrical resistance is:",
+    "options": ["Ampere", "Volt", "Ohm", "Coulomb"],
+    "correctAnswer": "Ohm",
+    "explanation": "Resistance is measured in ohms (Ω).",
+    "category": "Physics",
+    "classLevel": "Inter 2nd Year",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The phenomenon of light bending around obstacles is called:",
+    "options": ["Reflection", "Refraction", "Diffraction", "Polarization"],
+    "correctAnswer": "Diffraction",
+    "explanation": "Diffraction is the bending of waves around obstacles.",
+    "category": "Physics",
+    "classLevel": "Inter 2nd Year",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "A device that stores electric charge is a:",
+    "options": ["Resistor", "Capacitor", "Inductor", "Transformer"],
+    "correctAnswer": "Capacitor",
+    "explanation": "A capacitor stores electrical energy as charge.",
+    "category": "Physics",
+    "classLevel": "Inter 2nd Year",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "The functional group of alcohols is:",
+    "options": ["-CHO", "-COOH", "-OH", "-NH2"],
+    "correctAnswer": "-OH",
+    "explanation": "Alcohols contain the hydroxyl (-OH) group.",
+    "category": "Chemistry",
+    "classLevel": "Inter 2nd Year",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Which of the following is a noble gas?",
+    "options": ["Oxygen", "Nitrogen", "Argon", "Hydrogen"],
+    "correctAnswer": "Argon",
+    "explanation": "Argon is a noble (inert) gas in Group 18.",
+    "category": "Chemistry",
+    "classLevel": "Inter 2nd Year",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Esterification is a reaction between an acid and:",
+    "options": ["A base", "An alcohol", "A metal", "Water"],
+    "correctAnswer": "An alcohol",
+    "explanation": "Acid + alcohol → ester + water (esterification).",
+    "category": "Chemistry",
+    "classLevel": "Inter 2nd Year",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "The hormone that ripens fruits is:",
+    "options": ["Auxin", "Ethylene", "Cytokinin", "Gibberellin"],
+    "correctAnswer": "Ethylene",
+    "explanation": "Ethylene is a gaseous plant hormone that ripens fruit.",
+    "category": "Botany",
+    "classLevel": "Inter 2nd Year",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "Double fertilization is a characteristic of:",
+    "options": ["Algae", "Gymnosperms", "Angiosperms", "Fungi"],
+    "correctAnswer": "Angiosperms",
+    "explanation": "Double fertilization occurs in flowering plants (angiosperms).",
+    "category": "Botany",
+    "classLevel": "Inter 2nd Year",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "The structural and functional unit of the kidney is the:",
+    "options": ["Neuron", "Nephron", "Alveolus", "Villus"],
+    "correctAnswer": "Nephron",
+    "explanation": "The nephron is the functional unit of the kidney.",
+    "category": "Zoology",
+    "classLevel": "Inter 2nd Year",
+    "difficulty": "Medium",
+    "points": 15
+  },
+  {
+    "question": "DNA is mainly found in the:",
+    "options": ["Cytoplasm", "Nucleus", "Cell wall", "Ribosome"],
+    "correctAnswer": "Nucleus",
+    "explanation": "Most of a cell's DNA is located in the nucleus.",
+    "category": "Zoology",
+    "classLevel": "Inter 2nd Year",
+    "difficulty": "Easy",
+    "points": 10
+  },
+  {
+    "question": "Choose the correct synonym of 'diligent':",
+    "options": ["Lazy", "Hardworking", "Careless", "Slow"],
+    "correctAnswer": "Hardworking",
+    "explanation": "'Diligent' means hardworking and careful.",
+    "category": "English",
+    "classLevel": "Inter 2nd Year",
+    "difficulty": "Medium",
+    "points": 15
+  }
+]
