@@ -3,11 +3,18 @@ import 'dart:io';
 class ApiConstants {
   ApiConstants._();
 
+  static const bool isProduction = true;
+
   static String get baseUrl {
-    if (Platform.isAndroid) {
-      return 'https://smartstudent-api.onrender.com';
+    if (isProduction) {
+      return 'https://smartstudent-api-seu5.onrender.com';
     }
-    return 'https://smartstudent-api.onrender.com';
+
+    if (Platform.isAndroid) {
+      return 'http://10.0.2.2:3000';
+    }
+
+    return 'http://localhost:3000';
   }
 
   static String get authLogin => '$baseUrl/api/auth/login';

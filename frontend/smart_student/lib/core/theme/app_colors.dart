@@ -7,6 +7,10 @@ class AppColors {
   static const Color primaryBlueLight = Color(0xFF3D7DD4);
   static const Color primaryBlueDark = Color(0xFF0D3B7A);
 
+  /// Deep royal blue used by the app icon & splash screen. Drives the
+  /// primary brand surfaces (AppBar, buttons, loaders, nav selection).
+  static const Color brandBlue = Color(0xFF002C98);
+
   static const Color secondaryGreen = Color(0xFF2ECC71);
   static const Color secondaryGreenLight = Color(0xFF58D68D);
   static const Color secondaryGreenDark = Color(0xFF1E8449);

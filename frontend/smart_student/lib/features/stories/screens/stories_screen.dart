@@ -113,8 +113,9 @@ class _StoryCard extends StatelessWidget {
             borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
             child: NetworkImageBox(
               url: story.imageUrl,
-              height: 150,
+              height: 240,
               width: double.infinity,
+              alignment: Alignment.topCenter,
               color: AppColors.accentRed,
               fallbackIcon: Icons.auto_stories_rounded,
             ),

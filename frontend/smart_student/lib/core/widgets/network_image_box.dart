@@ -9,6 +9,7 @@ class NetworkImageBox extends StatelessWidget {
   final double? height;
   final double? width;
   final BoxFit fit;
+  final Alignment alignment;
   final IconData fallbackIcon;
   final Color color;
 
@@ -18,6 +19,7 @@ class NetworkImageBox extends StatelessWidget {
     this.height,
     this.width,
     this.fit = BoxFit.cover,
+    this.alignment = Alignment.center,
     this.fallbackIcon = Icons.image_rounded,
     this.color = AppColors.primaryBlue,
   });
@@ -32,6 +34,7 @@ class NetworkImageBox extends StatelessWidget {
       height: height,
       width: width,
       fit: fit,
+      alignment: alignment,
       loadingBuilder: (context, child, progress) {
         if (progress == null) return child;
         return _placeholder(loading: true);

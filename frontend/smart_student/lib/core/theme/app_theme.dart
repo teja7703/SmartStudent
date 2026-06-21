@@ -6,8 +6,8 @@ class AppTheme {
 
   static ThemeData get lightTheme {
     final colorScheme = ColorScheme.fromSeed(
-      seedColor: AppColors.primaryBlue,
-      primary: AppColors.primaryBlue,
+      seedColor: AppColors.brandBlue,
+      primary: AppColors.brandBlue,
       secondary: AppColors.accentPurple,
       tertiary: AppColors.accentOrange,
       surface: AppColors.surfaceLight,
@@ -22,12 +22,13 @@ class AppTheme {
         centerTitle: false,
         elevation: 0,
         scrolledUnderElevation: 0,
-        backgroundColor: AppColors.backgroundLight,
-        foregroundColor: AppColors.textPrimary,
+        backgroundColor: AppColors.brandBlue,
+        foregroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.white),
         titleTextStyle: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w700,
-          color: AppColors.textPrimary,
+          color: Colors.white,
         ),
       ),
       cardTheme: CardThemeData(
@@ -40,7 +41,7 @@ class AppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primaryBlue,
+          backgroundColor: AppColors.brandBlue,
           foregroundColor: Colors.white,
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
@@ -55,8 +56,8 @@ class AppTheme {
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          foregroundColor: AppColors.primaryBlue,
-          side: const BorderSide(color: AppColors.primaryBlue),
+          foregroundColor: AppColors.brandBlue,
+          side: const BorderSide(color: AppColors.brandBlue),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
@@ -77,13 +78,13 @@ class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: const BorderSide(color: AppColors.primaryBlue, width: 2),
+          borderSide: const BorderSide(color: AppColors.brandBlue, width: 2),
         ),
         hintStyle: const TextStyle(color: AppColors.textHint),
       ),
       chipTheme: ChipThemeData(
         backgroundColor: AppColors.surfaceLight,
-        selectedColor: AppColors.primaryBlue.withValues(alpha: 0.12),
+        selectedColor: AppColors.brandBlue.withValues(alpha: 0.12),
         labelStyle: const TextStyle(fontSize: 13),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
@@ -92,7 +93,7 @@ class AppTheme {
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: AppColors.surfaceLight,
-        selectedItemColor: AppColors.primaryBlue,
+        selectedItemColor: AppColors.brandBlue,
         unselectedItemColor: AppColors.textHint,
         type: BottomNavigationBarType.fixed,
         elevation: 8,
@@ -105,11 +106,11 @@ class AppTheme {
         height: 68,
         labelBehavior:
             NavigationDestinationLabelBehavior.onlyShowSelected,
-        indicatorColor: AppColors.primaryBlue.withValues(alpha: 0.12),
+        indicatorColor: AppColors.brandBlue.withValues(alpha: 0.12),
         iconTheme: WidgetStateProperty.resolveWith((states) {
           final selected = states.contains(WidgetState.selected);
           return IconThemeData(
-            color: selected ? AppColors.primaryBlue : AppColors.textHint,
+            color: selected ? AppColors.brandBlue : AppColors.textHint,
             size: 24,
           );
         }),
@@ -118,9 +119,12 @@ class AppTheme {
           return TextStyle(
             fontSize: 12,
             fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
-            color: selected ? AppColors.primaryBlue : AppColors.textHint,
+            color: selected ? AppColors.brandBlue : AppColors.textHint,
           );
         }),
+      ),
+      progressIndicatorTheme: const ProgressIndicatorThemeData(
+        color: AppColors.brandBlue,
       ),
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,

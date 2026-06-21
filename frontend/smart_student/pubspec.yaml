@@ -51,6 +51,9 @@ dependencies:
   path_provider: ^2.1.6
   open_filex: ^4.7.0
   image_picker: ^1.2.2
+  # Runtime API (preserve / remove) is used in main.dart, so it must be a
+  # regular dependency (the CLI generator works the same).
+  flutter_native_splash: ^2.4.6
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +65,38 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+
+# ---------------------------------------------------------------------------
+# App launcher icon configuration.
+# Generate with:  dart run flutter_launcher_icons
+# ---------------------------------------------------------------------------
+flutter_launcher_icons:
+  image_path: "assets/images/app_icon_fullbleed.png"
+  android: true
+  ios: true
+  min_sdk_android: 21
+  remove_alpha_ios: true
+  background_color_ios: "#002C98"
+  # Android adaptive icon (API 26+): brand-blue background + centred logo.
+  adaptive_icon_background: "#002C98"
+  adaptive_icon_foreground: "assets/images/app_icon_adaptive_fg.png"
+
+# ---------------------------------------------------------------------------
+# Native splash screen configuration.
+# Generate with:  dart run flutter_native_splash:create
+# ---------------------------------------------------------------------------
+flutter_native_splash:
+  color: "#002C98"
+  image: "assets/images/splash_logo.png"
+  android: true
+  ios: true
+  web: false
+  fullscreen: true
+  # Android 12+ uses the system splash API (logo clipped to a circle).
+  android_12:
+    image: "assets/images/splash_logo.png"
+    color: "#002C98"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -74,10 +109,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

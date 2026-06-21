@@ -7,6 +7,13 @@ import 'features/auth/screens/login_screen.dart';
 import 'features/careers/screens/career_category_screen.dart';
 import 'features/careers/screens/career_detail_screen.dart';
 import 'features/careers/screens/careers_screen.dart';
+import 'features/games/screens/games_screen.dart';
+import 'features/games/screens/guess_number_screen.dart';
+import 'features/games/screens/memory_match_screen.dart';
+import 'features/games/screens/quick_math_screen.dart';
+import 'features/games/screens/riddles_screen.dart';
+import 'features/games/screens/tic_tac_toe_screen.dart';
+import 'features/games/screens/word_scramble_screen.dart';
 import 'features/home/screens/home_screen.dart';
 import 'features/previous_papers/models/previous_paper_model.dart';
 import 'features/previous_papers/screens/previous_paper_detail_screen.dart';
@@ -244,6 +251,34 @@ GoRouter createRouter(AuthCubit authCubit) {
       GoRoute(
         path: '/profile/edit',
         builder: (context, state) => const EditProfileScreen(),
+      ),
+      GoRoute(
+        path: '/games',
+        builder: (context, state) => const GamesScreen(),
+      ),
+      GoRoute(
+        path: '/games/memory',
+        builder: (context, state) => const MemoryMatchScreen(),
+      ),
+      GoRoute(
+        path: '/games/quick-math',
+        builder: (context, state) => const QuickMathScreen(),
+      ),
+      GoRoute(
+        path: '/games/tic-tac-toe',
+        builder: (context, state) => const TicTacToeScreen(),
+      ),
+      GoRoute(
+        path: '/games/word-scramble',
+        builder: (context, state) => const WordScrambleScreen(),
+      ),
+      GoRoute(
+        path: '/games/riddles',
+        builder: (context, state) => const RiddlesScreen(),
+      ),
+      GoRoute(
+        path: '/games/guess-number',
+        builder: (context, state) => const GuessNumberScreen(),
       ),
       GoRoute(
         path: '/search',

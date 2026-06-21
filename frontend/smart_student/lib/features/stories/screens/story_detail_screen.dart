@@ -142,6 +142,7 @@ class _Detail extends StatelessWidget {
                       children: [
                         NetworkImageBox(
                           url: story.imageUrl,
+                          alignment: Alignment.topCenter,
                           color: AppColors.accentRed,
                           fallbackIcon: Icons.auto_stories_rounded,
                         ),

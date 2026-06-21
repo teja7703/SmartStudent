@@ -8,8 +8,10 @@ class ApiClient {
     _dio = Dio(
       BaseOptions(
         baseUrl: ApiConstants.baseUrl,
-        connectTimeout: const Duration(seconds: 15),
-        receiveTimeout: const Duration(seconds: 15),
+        // Generous timeouts so the first request survives a Render free-tier
+        // cold start (the instance can take ~30-50s to wake from idle).
+        connectTimeout: const Duration(seconds: 60),
+        receiveTimeout: const Duration(seconds: 60),
         headers: {'Content-Type': 'application/json'},
       ),
     );
@@ -24,17 +26,12 @@ class ApiClient {
     return _dio.get(path, queryParameters: queryParameters);
   }
 
-  Future<Response<dynamic>> post(
-    String path, {
-    dynamic data,
-  }) {
+  Future<Response<dynamic>> post(String path, {dynamic data}) {
+
     return _dio.post(path, data: data);
   }
 
-  Future<Response<dynamic>> put(
-    String path, {
-    dynamic data,
-  }) {
+  Future<Response<dynamic>> put(String path, {dynamic data}) {
     return _dio.put(path, data: data);
   }
 }

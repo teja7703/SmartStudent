@@ -73,7 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
               color: AppColors.primaryBlue,
               child: CustomScrollView(
                 slivers: [
-                  SliverToBoxAdapter(child: _Header(user: user, greeting: _greeting())),
+                  SliverToBoxAdapter(
+                    child: _Header(user: user, greeting: _greeting()),
+                  ),
                   if (state is DashboardLoading)
                     const SliverToBoxAdapter(
                       child: Padding(
@@ -99,8 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     SliverPadding(
                       padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
                       sliver: SliverGrid(
-                        gridDelegate:
-                            SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount:
                               MediaQuery.of(context).size.width > 600 ? 3 : 2,
                           crossAxisSpacing: 14,
@@ -128,7 +129,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
                         child: GradientBanner(
                           title: 'DAILY QUIZ',
-                          message: 'Test what you learned today and earn points!',
+                          message:
+                              'Test what you learned today and earn points!',
                           icon: Icons.bolt_rounded,
                           gradient: AppColors.orangeGradient,
                           actionLabel: 'Start Quiz',
@@ -199,6 +201,13 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: () => context.push('/previous-papers'),
       ),
       FeatureTile(
+        title: 'Games & Puzzles',
+        subtitle: 'Have fun',
+        icon: Icons.videogame_asset_rounded,
+        color: AppColors.accentPurple,
+        onTap: () => context.push('/games'),
+      ),
+      FeatureTile(
         title: 'Video Lessons',
         subtitle: 'Coming soon',
         icon: Icons.play_circle_fill_rounded,
@@ -228,16 +237,20 @@ class _ProgressSection extends StatelessWidget {
                       color: AppColors.secondaryGreen.withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(14),
                     ),
-                    child: const Icon(Icons.rocket_launch_rounded,
-                        color: AppColors.secondaryGreen),
+                    child: const Icon(
+                      Icons.rocket_launch_rounded,
+                      color: AppColors.secondaryGreen,
+                    ),
                   ),
                   const SizedBox(width: 14),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Start your journey',
-                            style: AppTextStyles.titleMedium),
+                        Text(
+                          'Start your journey',
+                          style: AppTextStyles.titleMedium,
+                        ),
                         const SizedBox(height: 4),
                         Text(
                           'Take a quiz or open a lesson — your progress will show up here.',
@@ -286,8 +299,10 @@ class _ProgressSection extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text('Recent Activity',
-                    style: AppTextStyles.titleMedium),
+                child: Text(
+                  'Recent Activity',
+                  style: AppTextStyles.titleMedium,
+                ),
               ),
             ),
             ...stats.recent.map(
@@ -326,11 +341,16 @@ class _ProgressStat extends StatelessWidget {
           children: [
             Icon(icon, color: color),
             const SizedBox(height: 8),
-            Text(value,
-                style: AppTextStyles.headlineMedium.copyWith(color: color)),
+            Text(
+              value,
+              style: AppTextStyles.headlineMedium.copyWith(color: color),
+            ),
             const SizedBox(height: 2),
-            Text(label,
-                style: AppTextStyles.labelMedium, textAlign: TextAlign.center),
+            Text(
+              label,
+              style: AppTextStyles.labelMedium,
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       ),
@@ -377,15 +397,19 @@ class _ActivityTile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(item.title,
-                    style: AppTextStyles.titleMedium,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis),
+                Text(
+                  item.title,
+                  style: AppTextStyles.titleMedium,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
                 if (item.subtitle.isNotEmpty)
-                  Text(item.subtitle,
-                      style: AppTextStyles.bodyMedium,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis),
+                  Text(
+                    item.subtitle,
+                    style: AppTextStyles.bodyMedium,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
               ],
             ),
           ),
@@ -420,6 +444,30 @@ class _Header extends StatelessWidget {
           children: [
             Row(
               children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.asset(
+                    'assets/images/app_icon_fullbleed.png',
+                    width: 40,
+                    height: 40,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    'Smart Student',
+                    style: AppTextStyles.titleLarge.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 18),
+            Row(
+              children: [
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -448,8 +496,11 @@ class _Header extends StatelessWidget {
                       backgroundColor: Colors.white.withValues(alpha: 0.22),
                       backgroundImage: provider,
                       child: provider == null
-                          ? const Icon(Icons.person,
-                              color: Colors.white, size: 28)
+                          ? const Icon(
+                              Icons.person,
+                              color: Colors.white,
+                              size: 28,
+                            )
                           : null,
                     );
                   },
@@ -457,9 +508,7 @@ class _Header extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 18),
-            _SearchField(
-              onTap: () => context.push('/search'),
-            ),
+            _SearchField(onTap: () => context.push('/search')),
             const SizedBox(height: 16),
             BlocBuilder<ProgressCubit, ProgressStats>(
               builder: (context, stats) {
